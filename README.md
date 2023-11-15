@@ -3,7 +3,7 @@
 ## Installing
 
 This package requires [PyICU], which requires some libraries installed.
-Please see the [Instaling PyICU](https://gitlab.pyicu.org/main/pyicu#installing-pyicu).
+Please see the [Installing PyICU](https://gitlab.pyicu.org/main/pyicu#installing-pyicu).
 
 [PyICU]: https://pyicu.org
 
@@ -16,4 +16,16 @@ pipenv install
 ```shell-session
 ./scripts/build.sh
 
+```
+
+## Committing Changes
+
+If you are planning to commit changes,
+please install the dev packages as well:
+```shell-session
+pipenv install -d
+```
+and run the pre-commit checks:
+```shell-session
+./scripts/precommit.sh
 ```
