@@ -2,7 +2,7 @@
 
 ## Installing
 
-This package requires [PyICU], which requires some libraries installed.
+This package requires [PyICU], which requires some libraries.
 Please see the [Installing PyICU](https://gitlab.pyicu.org/main/pyicu#installing-pyicu).
 
 [PyICU]: https://pyicu.org
@@ -13,12 +13,16 @@ pipenv install
 
 ## Build the Data File
 
+Before running scripts, please make sure you are in the virtualenv.
+```shell-session
+pipenv shell
+```
+Then this script builds the data file.
 ```shell-session
 ./scripts/build.sh
-
 ```
 
-## Committing Changes
+## Commit Changes
 
 If you are planning to commit changes,
 please install the dev packages as well:
