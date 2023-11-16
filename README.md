@@ -22,9 +22,9 @@ Then this script builds the data file.
 ./scripts/build.sh
 ```
 
-## Commit Changes
+## Code Changes
 
-If you are planning to commit changes,
+If you are planning to commit code changes,
 please install the dev packages as well:
 ```shell-session
 pipenv install -d
