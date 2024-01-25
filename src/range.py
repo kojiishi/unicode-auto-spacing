@@ -19,18 +19,26 @@ class Range(object):
         self.value = value
         self.min = min
         self.max = max
+        self.comment = None
 
     def to_string(self) -> str:
-        comments = []
+        comment = self.comment
+        if not comment:
+            comment = self.name()
+            if not comment:
+                return '{0:14} ; {1}'.format(self.code(), self.value)
+        return '{0:14} ; {1}  # {2}'.format(self.code(), self.value, comment)
+
+    def code(self) -> str:
         if self.min == self.max:
-            range = '{0:04X}'.format(self.min)
-            comments.append('{0}'.format(unicode_name(self.min)))
-        else:
-            range = '{0:04X}..{1:04X}'.format(self.min, self.max)
-            comments.append('{0}..{1}'.format(unicode_name(self.min),
-                                              unicode_name(self.max)))
-        comment = '  # {0}'.format(' '.join(comments))
-        return '{0:14} ; {1}{2}'.format(range, self.value, comment)
+            return '{0:04X}'.format(self.min)
+        return '{0:04X}..{1:04X}'.format(self.min, self.max)
+
+    def name(self) -> str:
+        if self.min == self.max:
+            return '{0}'.format(unicode_name(self.min))
+        return '{0}..{1}'.format(unicode_name(self.min),
+                                 unicode_name(self.max))
 
     @staticmethod
     def ranges(get_value: Callable[[str], typing.Any]) -> Iterator["Range"]:
