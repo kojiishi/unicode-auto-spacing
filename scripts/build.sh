@@ -1,3 +1,3 @@
 #!/bin/bash
 set -e
-python src/unicode_cjk.py > UnicodeCJK.txt
+python src/auto-spacing.py > auto-spacing.txt

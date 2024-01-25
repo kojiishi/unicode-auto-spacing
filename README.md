@@ -1,4 +1,4 @@
-# Unicode-CJK
+# Unicode auto-spacing
 
 ## Installing
 
