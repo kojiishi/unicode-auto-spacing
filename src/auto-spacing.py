@@ -1,3 +1,4 @@
+from collections.abc import Callable
 from collections.abc import Iterator
 from icu import UnicodeSet
 import sys
@@ -13,7 +14,49 @@ def unicode_name(c: int) -> str:
         return ''
 
 
-class EastAsianSpacing(object):
+class Range(object):
+
+    def __init__(self, value: typing.Any, min: int, max: int) -> None:
+        self.value = value
+        self.min = min
+        self.max = max
+
+    def to_string(self) -> str:
+        comments = []
+        if self.min == self.max:
+            range = '{0:04X}'.format(self.min)
+            comments.append('{0}'.format(unicode_name(self.min)))
+        else:
+            range = '{0:04X}..{1:04X}'.format(self.min, self.max)
+            comments.append('{0}..{1}'.format(unicode_name(self.min),
+                                              unicode_name(self.max)))
+        comment = '  # {0}'.format(' '.join(comments))
+        return '{0:14} ; {1}{2}'.format(range, self.value, comment)
+
+    @staticmethod
+    def ranges(get_value: Callable[[str], typing.Any]) -> Iterator["Range"]:
+        last_value = None
+        min = 0
+        for c in range(0, 0x110000):
+            ch = chr(c)
+            category = unicodedata.category(ch)
+            if category == 'Cn':  # Skip "Unassigned" code points.
+                if last_value:
+                    yield Range(last_value, min, c - 1)
+                last_value = None
+                continue
+            value = get_value(ch)
+            if value == last_value:
+                continue
+            if last_value:
+                yield Range(last_value, min, c - 1)
+            last_value = value
+            min = c
+        if last_value:
+            yield Range(last_value, min, c - 1)
+
+
+class AutoSpacing(object):
 
     def __init__(self) -> None:
         # https://drafts.csswg.org/css-text-4/#text-spacing-classes
@@ -30,45 +73,8 @@ class EastAsianSpacing(object):
             return 'N'
         return None
 
-    class Range(object):
-
-        def __init__(self, value: str, min: int, max: int) -> None:
-            self.value = value
-            self.min = min
-            self.max = max
-
-        def format(self) -> str:
-            comments = []
-            if self.min == self.max:
-                range = '{0:04X}'.format(self.min)
-                comments.append('{0}'.format(unicode_name(self.min)))
-            else:
-                range = '{0:04X}..{1:04X}'.format(self.min, self.max)
-                comments.append('{0}..{1}'.format(unicode_name(self.min),
-                                                  unicode_name(self.max)))
-            comment = '  # {0}'.format(' '.join(comments))
-            return '{0:14} ; {1}{2}'.format(range, self.value, comment)
-
     def ranges(self) -> Iterator[Range]:
-        last_value = None
-        min = 0
-        for c in range(0, 0x110000):
-            ch = chr(c)
-            category = unicodedata.category(ch)
-            if category == 'Cn':  # Skip "Unassigned" code points.
-                if last_value:
-                    yield self.Range(last_value, min, c - 1)
-                last_value = None
-                continue
-            value = self.value(ch)
-            if value == last_value:
-                continue
-            if last_value:
-                yield self.Range(last_value, min, c - 1)
-            last_value = value
-            min = c
-        if last_value:
-            yield self.Range(last_value, min, c - 1)
+        return Range.ranges(lambda ch: self.value(ch))
 
     headers = """#
 # @missing: 0000..10FFFF; O
@@ -77,13 +83,13 @@ class EastAsianSpacing(object):
     def print(self) -> None:
         print(self.headers)
         for range in self.ranges():
-            print(range.format())
+            print(range.to_string())
 
     @staticmethod
     def main() -> None:
-        spacing = EastAsianSpacing()
+        spacing = AutoSpacing()
         spacing.print()
 
 
 if __name__ == "__main__":
-    EastAsianSpacing.main()
+    AutoSpacing.main()
