@@ -1,6 +1,7 @@
 from collections.abc import Iterator
 from icu import UnicodeSet
 import typing
+import unicodedata
 from range import Range
 
 
@@ -22,15 +23,26 @@ class AutoSpacing(object):
         return None
 
     headers = """#
+# The comments following the number sign "#" list the East_Asian_Width property
+# value, followed by the Unicode character name or names.
+#
 # @missing: 0000..10FFFF; O
 """
 
     def print(self) -> None:
         print(self.headers)
-        get_value = lambda ch: self.value(ch)
+        get_value = lambda ch: (self.value(ch), unicodedata.east_asian_width(ch))
         ranges = Range.ranges(get_value)
         for range in ranges:
-            print(range.to_string())
+            values = range.value
+            value = values[0]
+            eaw = values[1]
+            if value is None:
+                if eaw.startswith('N'):
+                    continue
+                value = 'O'
+            range.value = value
+            print(range.to_string(comment='{1:2}  {0}'.format(range.comment(), eaw)))
 
     @staticmethod
     def main() -> None:
