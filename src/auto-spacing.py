@@ -1,4 +1,4 @@
-from collections.abc import Iterator
+import argparse
 from icu import UnicodeSet
 import typing
 import unicodedata
@@ -29,9 +29,11 @@ class AutoSpacing(object):
 # @missing: 0000..10FFFF; O
 """
 
-    def print(self) -> None:
-        print(self.headers)
-        get_value = lambda ch: (self.value(ch), unicodedata.east_asian_width(ch))
+    def print(self, args: typing.Any) -> None:
+        if not args.tsv:
+            print(self.headers)
+        get_value = lambda ch: (self.value(ch), unicodedata.east_asian_width(ch
+                                                                             ))
         ranges = Range.ranges(get_value)
         for range in ranges:
             values = range.value
@@ -42,12 +44,21 @@ class AutoSpacing(object):
                     continue
                 value = 'O'
             range.value = value
-            print(range.to_string(comment='{1:2}  {0}'.format(range.comment(), eaw)))
+            if args.tsv:
+                print('\t'.join(
+                    ('U' + range.code(), value, eaw, range.name())))
+                continue
+            print(
+                range.to_string(
+                    comment='{1:2}  {0}'.format(range.comment(), eaw)))
 
     @staticmethod
     def main() -> None:
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--tsv', action='store_true')
+        args = parser.parse_args()
         spacing = AutoSpacing()
-        spacing.print()
+        spacing.print(args)
 
 
 if __name__ == "__main__":
