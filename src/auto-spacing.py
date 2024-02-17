@@ -21,16 +21,15 @@ class AutoSpacing(object):
             return 'N'
         return None
 
-    def ranges(self) -> Iterator[Range]:
-        return Range.ranges(lambda ch: self.value(ch))
-
     headers = """#
 # @missing: 0000..10FFFF; O
 """
 
     def print(self) -> None:
         print(self.headers)
-        for range in self.ranges():
+        get_value = lambda ch: self.value(ch)
+        ranges = Range.ranges(get_value)
+        for range in ranges:
             print(range.to_string())
 
     @staticmethod
