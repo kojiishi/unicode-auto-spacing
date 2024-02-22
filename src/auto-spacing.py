@@ -9,7 +9,7 @@ class AutoSpacing(object):
 
     def __init__(self) -> None:
         # https://drafts.csswg.org/css-text-4/#text-spacing-classes
-        ideographs = UnicodeSet(r'[[:sc=Han:]]')
+        ideographs = UnicodeSet(r'[[:sc=Han:][:scx=Han:]]')
         ideographs.addAll(UnicodeSet(r'[[\u3041-\u30FF]-[:P:]]'))
         ideographs.addAll(UnicodeSet(r'[[\u31C0-\u31FF]]'))
 
