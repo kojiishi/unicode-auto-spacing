@@ -13,10 +13,11 @@ class AutoSpacing(object):
         ideographs.addAll(UnicodeSet(r'[[:sc=Han:][:scx=Han:]]'))
         ideographs.addAll(UnicodeSet(r'[[:sc=Hira:][:scx=Hira:]-[:P:]]'))
         ideographs.addAll(UnicodeSet(r'[[:sc=Kana:][:scx=Kana:]-[:P:]]'))
+        ideographs.removeAll(UnicodeSet(r'[[:ea=H:]]'))
 
         letters_numerals = UnicodeSet()
         letters_numerals.addAll(UnicodeSet(r'[[:L:][:M:][:Nd:]]'))
-        letters_numerals.removeAll(UnicodeSet(r'[[:ea=F:]]'))
+        letters_numerals.removeAll(UnicodeSet(r'[[:ea=F:][:ea=H:]]'))
 
         self.ideographs = ideographs
         self.letters_numerals = letters_numerals
