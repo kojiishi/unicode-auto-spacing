@@ -11,8 +11,8 @@ class AutoSpacing(object):
         # https://drafts.csswg.org/css-text-4/#text-spacing-classes
         ideographs = UnicodeSet()
         ideographs.addAll(UnicodeSet(r'[[:sc=Han:][:scx=Han:]]'))
-        ideographs.addAll(UnicodeSet(r'[[\u3041-\u30FF]-[:P:]]'))
-        ideographs.addAll(UnicodeSet(r'[[\u31C0-\u31FF]]'))
+        ideographs.addAll(UnicodeSet(r'[[:sc=Hira:][:scx=Hira:]-[:P:]]'))
+        ideographs.addAll(UnicodeSet(r'[[:sc=Kana:][:scx=Kana:]-[:P:]]'))
 
         letters_numerals = UnicodeSet()
         letters_numerals.addAll(UnicodeSet(r'[[:L:][:M:][:Nd:]]'))
