@@ -8,19 +8,10 @@ from range import Range
 class AutoSpacing(object):
 
     def __init__(self) -> None:
-        # https://drafts.csswg.org/css-text-4/#text-spacing-classes
-        ideographs = UnicodeSet()
-        ideographs.addAll(UnicodeSet(r'[[:sc=Han:][:scx=Han:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Tang:][:scx=Tang:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Kits:][:scx=Kits:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Nshu:][:scx=Nshu:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Hira:][:scx=Hira:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Kana:][:scx=Kana:]]'))
-        ideographs.removeAll(UnicodeSet(r'[[:P:]]'))
-        ideographs.removeAll(UnicodeSet(r'[[:ea=H:]]'))
-        non_modifier_symbols = UnicodeSet(r'[[:S:]-[:Sk:]]')
-        ideographs.removeAll(non_modifier_symbols)
-        ideographs.removeAll(UnicodeSet(r'[[:No:]]'))
+        # https://github.com/w3c/csswg-drafts/pull/9503#discussion_r1374477268
+        ideographs = UnicodeSet(
+            r'[[[:sc=Hiragana:][:sc=Katakana:][:sc=Common:][:ideographic:]' +
+            r'&[:gc=L:]&[:ea=W:]][[:gc=L:][:gc=Nl:]&[:gc=So:]&[:sc=Hani:]]]')
 
         letters_numerals = UnicodeSet()
         letters_numerals.addAll(UnicodeSet(r'[[:L:][:M:][:Nd:]]'))
