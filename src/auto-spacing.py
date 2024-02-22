@@ -9,9 +9,13 @@ class AutoSpacing(object):
 
     def __init__(self) -> None:
         # https://drafts.csswg.org/css-text-4/#text-spacing-classes
-        ideographs = UnicodeSet(
-            r'[[\u3041-\u30FF]-[:P:][\u31C0-\u31FF][:sc=Han:]]')
-        letters_numerals = UnicodeSet(r'[[:L:][:M:][:Nd:]-[:ea=F:]]')
+        ideographs = UnicodeSet(r'[[:sc=Han:]]')
+        ideographs.addAll(UnicodeSet(r'[[\u3041-\u30FF]-[:P:]]'))
+        ideographs.addAll(UnicodeSet(r'[[\u31C0-\u31FF]]'))
+
+        letters_numerals = UnicodeSet(r'[[:L:][:M:][:Nd:]]')
+        letters_numerals.removeAll(UnicodeSet(r'[[:ea=F:]]'))
+
         self.ideographs = ideographs
         self.letters_numerals = letters_numerals
 
