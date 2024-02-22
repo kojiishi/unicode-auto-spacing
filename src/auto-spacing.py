@@ -10,12 +10,13 @@ class AutoSpacing(object):
     def __init__(self) -> None:
         # https://drafts.csswg.org/css-text-4/#text-spacing-classes
         ideographs = UnicodeSet()
-        ideographs.addAll(UnicodeSet(r'[[:sc=Han:][:scx=Han:]-[:P:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Tang:][:scx=Tang:]-[:P:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Kits:][:scx=Kits:]-[:P:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Nshu:][:scx=Nshu:]-[:P:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Hira:][:scx=Hira:]-[:P:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Kana:][:scx=Kana:]-[:P:]]'))
+        ideographs.addAll(UnicodeSet(r'[[:sc=Han:][:scx=Han:]]'))
+        ideographs.addAll(UnicodeSet(r'[[:sc=Tang:][:scx=Tang:]]'))
+        ideographs.addAll(UnicodeSet(r'[[:sc=Kits:][:scx=Kits:]]'))
+        ideographs.addAll(UnicodeSet(r'[[:sc=Nshu:][:scx=Nshu:]]'))
+        ideographs.addAll(UnicodeSet(r'[[:sc=Hira:][:scx=Hira:]]'))
+        ideographs.addAll(UnicodeSet(r'[[:sc=Kana:][:scx=Kana:]]'))
+        ideographs.removeAll(UnicodeSet(r'[[:P:]]'))
         ideographs.removeAll(UnicodeSet(r'[[:ea=H:]]'))
 
         letters_numerals = UnicodeSet()
