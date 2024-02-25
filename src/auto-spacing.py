@@ -16,6 +16,7 @@ class AutoSpacing(object):
         ideographs.addAll(UnicodeSet(r'[[:sc=Nshu:][:scx=Nshu:]]'))
         ideographs.addAll(UnicodeSet(r'[[:sc=Hira:][:scx=Hira:]]'))
         ideographs.addAll(UnicodeSet(r'[[:sc=Kana:][:scx=Kana:]]'))
+        ideographs.addAll(UnicodeSet(r'[[:sc=Bopo:][:scx=Bopo:]]'))
         ideographs.removeAll(UnicodeSet(r'[[:P:]]'))
         ideographs.removeAll(UnicodeSet(r'[[:ea=H:]]'))
         non_modifier_symbols = UnicodeSet(r'[[:S:]-[:Sk:]]')
