@@ -25,6 +25,7 @@ class AutoSpacing(object):
 
         letters_numerals = UnicodeSet()
         letters_numerals.addAll(UnicodeSet(r'[[:L:][:M:][:Nd:]]'))
+        letters_numerals.removeAll(UnicodeSet(r'[[:sc=Hang:][:scx=Hang:]]'))
         letters_numerals.removeAll(UnicodeSet(r'[[:ea=F:][:ea=H:]]'))
 
         self.ideographs = ideographs
