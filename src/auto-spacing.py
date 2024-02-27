@@ -41,6 +41,9 @@ class AutoSpacing(object):
 # The comments following the number sign "#" list the East_Asian_Width property
 # value, followed by the Unicode character name or names.
 #
+# Code points that have the value O and the East_Asian_Width property value N or
+# Na are omitted.
+#
 # @missing: 0000..10FFFF; O
 """
 
