@@ -8,7 +8,7 @@ from range import Range
 class AutoSpacing(object):
 
     def __init__(self) -> None:
-        # TODO(kojii): Read the data from Unicode to keep this up-to-date.
+        # TODO: Read the data from Unicode to keep this up-to-date.
         # https://drafts.csswg.org/css-text-4/#text-spacing-classes
         ideographs = UnicodeSet()
         ideographs.addAll(UnicodeSet(r'[[:sc=Han:][:scx=Han:]]'))
