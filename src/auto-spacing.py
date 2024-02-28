@@ -25,6 +25,14 @@ class AutoSpacing(object):
 
         letters_numerals = UnicodeSet()
         letters_numerals.addAll(UnicodeSet(r'[[:L:][:M:][:Nd:]]'))
+        # https://github.com/kojiishi/unicode-auto-spacing/issues/11
+        letters_numerals.addAll(UnicodeSet(r'[[:Po:]]'))
+        letters_numerals.remove('\u002A')
+        letters_numerals.remove('\u002F')
+        letters_numerals.remove('\u00B7')
+        letters_numerals.remove('\u2026')
+        # Small Form Variants https://www.unicode.org/charts/PDF/UFE50.pdf
+        letters_numerals.remove('\uFE50', '\uFE6F')
         letters_numerals.removeAll(UnicodeSet(r'[[:sc=Hang:][:scx=Hang:]]'))
         letters_numerals.removeAll(UnicodeSet(r'[[:ea=F:][:ea=H:]]'))
 
