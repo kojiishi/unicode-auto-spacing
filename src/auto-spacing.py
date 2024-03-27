@@ -29,12 +29,28 @@ class AutoSpacing(object):
         letters_numerals.removeAll(UnicodeSet(r'[[:ea=F:][:ea=H:][:ea=W:]]'))
         letters_numerals.removeAll(UnicodeSet(r'[[:sc=Hang:][:scx=Hang:]]'))
 
+        conditional = UnicodeSet()
+        # https://github.com/kojiishi/unicode-auto-spacing/issues/11
+        conditional.addAll(UnicodeSet(r'[[:Po:]]'))
+        conditional.removeAll(UnicodeSet(r'[[:ea=F:][:ea=H:][:ea=W:]]'))
+        conditional.remove('\u0022')  # QUOTATION MARK
+        conditional.remove('\u0027')  # APOSTROPHE
+        conditional.remove('\u002A')  # ASTERISK
+        conditional.remove('\u002F')  # SOLIDUS
+        conditional.remove('\u00B7')  # MIDDLE DOT
+        conditional.remove('\u2020')  # DAGGER
+        conditional.remove('\u2021')  # DOUBLE DAGGER
+        conditional.remove('\u2026')  # HORIZONTAL ELLIPSIS
+
         self.ideographs = ideographs
         self.letters_numerals = letters_numerals
+        self.conditional = conditional
 
     def value(self, ch: str) -> typing.Optional[str]:
         if self.ideographs.contains(ch):
             return 'W'
+        if self.conditional.contains(ch):
+            return 'CN'
         if self.letters_numerals.contains(ch):
             return 'N'
         return None
