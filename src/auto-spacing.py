@@ -27,14 +27,18 @@ class AutoSpacing(object):
         letters_numerals.addAll(UnicodeSet(r'[[:L:][:M:][:Nd:]]'))
         # https://github.com/kojiishi/unicode-auto-spacing/issues/11
         letters_numerals.addAll(UnicodeSet(r'[[:Po:]]'))
-        letters_numerals.remove('\u002A')
-        letters_numerals.remove('\u002F')
-        letters_numerals.remove('\u00B7')
-        letters_numerals.remove('\u2026')
+        letters_numerals.remove('\u0022')  # QUOTATION MARK
+        letters_numerals.remove('\u0027')  # APOSTROPHE
+        letters_numerals.remove('\u002A')  # ASTERISK
+        letters_numerals.remove('\u002F')  # SOLIDUS
+        letters_numerals.remove('\u00B7')  # MIDDLE DOT
+        letters_numerals.remove('\u2020')  # DAGGER
+        letters_numerals.remove('\u2021')  # DOUBLE DAGGER
+        letters_numerals.remove('\u2026')  # HORIZONTAL ELLIPSIS
         # Small Form Variants https://www.unicode.org/charts/PDF/UFE50.pdf
         letters_numerals.remove('\uFE50', '\uFE6F')
         letters_numerals.removeAll(UnicodeSet(r'[[:sc=Hang:][:scx=Hang:]]'))
-        letters_numerals.removeAll(UnicodeSet(r'[[:ea=F:][:ea=H:]]'))
+        letters_numerals.removeAll(UnicodeSet(r'[[:ea=F:][:ea=H:][:ea=W:]]'))
 
         self.ideographs = ideographs
         self.letters_numerals = letters_numerals
