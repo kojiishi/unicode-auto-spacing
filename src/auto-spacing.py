@@ -32,6 +32,7 @@ class AutoSpacing(object):
         conditional = UnicodeSet()
         # https://github.com/kojiishi/unicode-auto-spacing/issues/11
         conditional.addAll(UnicodeSet(r'[[:Po:]]'))
+        conditional.removeAll(UnicodeSet(r'[[:ea=F:][:ea=H:][:ea=W:]]'))
         conditional.remove('\u0022')  # QUOTATION MARK
         conditional.remove('\u0027')  # APOSTROPHE
         conditional.remove('\u002A')  # ASTERISK
@@ -40,7 +41,6 @@ class AutoSpacing(object):
         conditional.remove('\u2020')  # DAGGER
         conditional.remove('\u2021')  # DOUBLE DAGGER
         conditional.remove('\u2026')  # HORIZONTAL ELLIPSIS
-        conditional.removeAll(UnicodeSet(r'[[:ea=F:][:ea=H:][:ea=W:]]'))
 
         self.ideographs = ideographs
         self.letters_numerals = letters_numerals
