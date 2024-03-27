@@ -39,8 +39,6 @@ class AutoSpacing(object):
         conditional.remove('\u2020')  # DAGGER
         conditional.remove('\u2021')  # DOUBLE DAGGER
         conditional.remove('\u2026')  # HORIZONTAL ELLIPSIS
-        # Small Form Variants https://www.unicode.org/charts/PDF/UFE50.pdf
-        conditional.remove('\uFE50', '\uFE6F')
         conditional.removeAll(UnicodeSet(r'[[:ea=F:][:ea=H:][:ea=W:]]'))
 
         self.ideographs = ideographs
