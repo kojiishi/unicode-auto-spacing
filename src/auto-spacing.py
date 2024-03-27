@@ -8,6 +8,7 @@ from range import Range
 class AutoSpacing(object):
 
     def __init__(self) -> None:
+        # TODO: Read the data from Unicode to keep this up-to-date.
         # https://drafts.csswg.org/css-text-4/#text-spacing-classes
         ideographs = UnicodeSet()
         ideographs.addAll(UnicodeSet(r'[[:sc=Han:][:scx=Han:]]'))
@@ -17,16 +18,16 @@ class AutoSpacing(object):
         ideographs.addAll(UnicodeSet(r'[[:sc=Hira:][:scx=Hira:]]'))
         ideographs.addAll(UnicodeSet(r'[[:sc=Kana:][:scx=Kana:]]'))
         ideographs.addAll(UnicodeSet(r'[[:sc=Bopo:][:scx=Bopo:]]'))
+        ideographs.removeAll(UnicodeSet(r'[[:ea=H:]]'))
         ideographs.removeAll(UnicodeSet(r'[[:P:]]'))
         non_modifier_symbols = UnicodeSet(r'[[:S:]-[:Sk:]]')
         ideographs.removeAll(non_modifier_symbols)
         ideographs.removeAll(UnicodeSet(r'[[:No:]]'))
-        ideographs.removeAll(UnicodeSet(r'[[:ea=H:]]'))
 
         letters_numerals = UnicodeSet()
         letters_numerals.addAll(UnicodeSet(r'[[:L:][:M:][:Nd:]]'))
-        letters_numerals.removeAll(UnicodeSet(r'[[:sc=Hang:][:scx=Hang:]]'))
         letters_numerals.removeAll(UnicodeSet(r'[[:ea=F:][:ea=H:][:ea=W:]]'))
+        letters_numerals.removeAll(UnicodeSet(r'[[:sc=Hang:][:scx=Hang:]]'))
 
         conditional = UnicodeSet()
         # https://github.com/kojiishi/unicode-auto-spacing/issues/11
