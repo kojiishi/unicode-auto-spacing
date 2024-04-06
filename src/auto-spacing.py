@@ -17,6 +17,8 @@ class AutoSpacing(object):
             ideographs |= ur.Set.scripts(script)
             ideographs |= ur.Set.script_extensions(scx)
         ideographs -= ur.Set.east_asian_width('H')
+        ideographs -= ur.Set.east_asian_width('N')
+        ideographs -= ur.Set.east_asian_width('Na')
         ideographs -= ur.Set.general_category('P')
         non_modifier_symbols = ur.Set.general_category('S')
         non_modifier_symbols -= ur.Set.general_category('Sk')
