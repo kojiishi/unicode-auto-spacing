@@ -3,6 +3,7 @@ from collections.abc import Iterator
 import sys
 import typing
 import unicodedata
+import unicodedata_reader as ur
 
 
 def unicode_name(c: int) -> str:
@@ -14,6 +15,8 @@ def unicode_name(c: int) -> str:
 
 
 class Range(object):
+
+    unassigned = ur.Set.general_category('Cn')  # "Unassigned"
 
     def __init__(self, value: typing.Any, min: int, max: int) -> None:
         self.value = value
@@ -48,8 +51,7 @@ class Range(object):
         min = 0
         for c in range(0, 0x110000):
             ch = chr(c)
-            category = unicodedata.category(ch)
-            if category == 'Cn':  # Skip "Unassigned" code points.
+            if c in Range.unassigned:  # Skip "Unassigned" code points.
                 if last_value:
                     yield Range(last_value, min, c - 1)
                 last_value = None
