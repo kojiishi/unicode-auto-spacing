@@ -7,7 +7,7 @@ from range import Range
 class AutoSpacing(object):
 
     def __init__(self) -> None:
-        # TODO: Read the data from Unicode to keep this up-to-date.
+        # Originally based on:
         # https://drafts.csswg.org/css-text-4/#text-spacing-classes
         ideographs = ur.Set()
         for script, scx in (('Han', 'Hani'), ('Tangut', 'Tang'),
