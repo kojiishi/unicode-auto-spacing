@@ -1,7 +1,6 @@
 import argparse
-from icu import UnicodeSet
 import typing
-import unicodedata
+import unicodedata_reader as ur
 from range import Range
 
 
@@ -10,29 +9,39 @@ class AutoSpacing(object):
     def __init__(self) -> None:
         # TODO: Read the data from Unicode to keep this up-to-date.
         # https://drafts.csswg.org/css-text-4/#text-spacing-classes
-        ideographs = UnicodeSet()
-        for script in ('Han', 'Tang', 'Kits', 'Nshu', 'Hira', 'Kana', 'Bopo'):
-            ideographs.addAll(
-                UnicodeSet('[[:sc={0}:][:scx={0}:]]'.format(script)))
-        ideographs.removeAll(UnicodeSet(r'[[:ea=H:]]'))
-        ideographs.removeAll(UnicodeSet(r'[[:P:]]'))
-        non_modifier_symbols = UnicodeSet(r'[[:S:]-[:Sk:]]')
-        ideographs.removeAll(non_modifier_symbols)
-        ideographs.removeAll(UnicodeSet(r'[[:No:]]'))
-        ideographs.add('\u3013')  # GETA MARK
+        ideographs = ur.Set()
+        for script, scx in (('Han', 'Hani'), ('Tangut', 'Tang'),
+                            ('Khitan_Small_Script',
+                             'Kits'), ('Nushu', 'Nshu'), ('Hiragana', 'Hira'),
+                            ('Katakana', 'Kana'), ('Bopomofo', 'Bopo')):
+            ideographs |= ur.Set.scripts(script)
+            ideographs |= ur.Set.script_extensions(scx)
+        ideographs -= ur.Set.east_asian_width('H')
+        ideographs -= ur.Set.general_category('P')
+        non_modifier_symbols = ur.Set.general_category('S')
+        non_modifier_symbols -= ur.Set.general_category('Sk')
+        ideographs -= non_modifier_symbols
+        ideographs -= ur.Set.general_category('No')
+        ideographs.add(0x3013)  # GETA MARK
 
-        letters_numerals = UnicodeSet()
-        letters_numerals.addAll(UnicodeSet(r'[[:L:][:M:][:Nd:]]'))
-        letters_numerals.removeAll(UnicodeSet(r'[[:ea=F:][:ea=H:][:ea=W:]]'))
-        letters_numerals.removeAll(UnicodeSet(r'[[:sc=Hang:][:scx=Hang:]]'))
+        letters_numerals = ur.Set()
+        letters_numerals |= ur.Set.general_category('L')
+        letters_numerals |= ur.Set.general_category('M')
+        letters_numerals |= ur.Set.general_category('Nd')
+        letters_numerals -= ur.Set.east_asian_width('F')
+        letters_numerals -= ur.Set.east_asian_width('H')
+        letters_numerals -= ur.Set.east_asian_width('W')
+        letters_numerals -= ur.Set.scripts('Hangul')
+        letters_numerals -= ur.Set.script_extensions('Hang')
 
         self.ideographs = ideographs
         self.letters_numerals = letters_numerals
 
     def value(self, ch: str) -> typing.Optional[str]:
-        if self.ideographs.contains(ch):
+        code = ord(ch)
+        if code in self.ideographs:
             return 'W'
-        if self.letters_numerals.contains(ch):
+        if code in self.letters_numerals:
             return 'N'
         return None
 
@@ -49,8 +58,9 @@ class AutoSpacing(object):
     def print(self, args: typing.Any) -> None:
         if not args.tsv:
             print(self.headers)
-        get_value = lambda ch: (self.value(ch), unicodedata.east_asian_width(ch
-                                                                             ))
+        east_asian_width = ur.UnicodeDataReader.default.east_asian_width()
+        get_value = lambda ch: (self.value(ch), east_asian_width.value(ord(ch))
+                                )
         ranges = Range.ranges(get_value)
         for range in ranges:
             values = range.value
@@ -73,7 +83,13 @@ class AutoSpacing(object):
     def main() -> None:
         parser = argparse.ArgumentParser()
         parser.add_argument('--tsv', action='store_true')
+        parser.add_argument('-f',
+                            '--no-cache',
+                            action='store_true',
+                            help='Disable the Unicode data cache.')
         args = parser.parse_args()
+        if args.no_cache:
+            ur.UnicodeDataReader.is_caching_allowed = False
         spacing = AutoSpacing()
         spacing.print(args)
 
