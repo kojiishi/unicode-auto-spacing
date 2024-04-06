@@ -11,13 +11,9 @@ class AutoSpacing(object):
         # TODO: Read the data from Unicode to keep this up-to-date.
         # https://drafts.csswg.org/css-text-4/#text-spacing-classes
         ideographs = UnicodeSet()
-        ideographs.addAll(UnicodeSet(r'[[:sc=Han:][:scx=Han:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Tang:][:scx=Tang:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Kits:][:scx=Kits:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Nshu:][:scx=Nshu:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Hira:][:scx=Hira:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Kana:][:scx=Kana:]]'))
-        ideographs.addAll(UnicodeSet(r'[[:sc=Bopo:][:scx=Bopo:]]'))
+        for script in ('Han', 'Tang', 'Kits', 'Nshu', 'Hira', 'Kana', 'Bopo'):
+            ideographs.addAll(
+                UnicodeSet('[[:sc={0}:][:scx={0}:]]'.format(script)))
         ideographs.removeAll(UnicodeSet(r'[[:ea=H:]]'))
         ideographs.removeAll(UnicodeSet(r'[[:P:]]'))
         non_modifier_symbols = UnicodeSet(r'[[:S:]-[:Sk:]]')
