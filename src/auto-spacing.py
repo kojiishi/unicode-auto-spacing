@@ -23,6 +23,7 @@ class AutoSpacing(object):
         non_modifier_symbols = UnicodeSet(r'[[:S:]-[:Sk:]]')
         ideographs.removeAll(non_modifier_symbols)
         ideographs.removeAll(UnicodeSet(r'[[:No:]]'))
+        ideographs.add('\u3013')  # GETA MARK
 
         letters_numerals = UnicodeSet()
         letters_numerals.addAll(UnicodeSet(r'[[:L:][:M:][:Nd:]]'))
