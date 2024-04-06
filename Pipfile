@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-unicodedata-reader = ">=1.0.1"
+unicodedata-reader = ">=1.1.0"
 
 [dev-packages]
 yapf = "*"

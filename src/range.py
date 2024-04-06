@@ -1,21 +1,12 @@
 from collections.abc import Callable
 from collections.abc import Iterator
-import sys
 import typing
-import unicodedata
 import unicodedata_reader as ur
-
-
-def unicode_name(c: int) -> str:
-    try:
-        return unicodedata.name(chr(c))
-    except Exception as err:
-        print('ERROR: U+{1:04X}: {0}'.format(err, c), file=sys.stderr)
-        return ''
 
 
 class Range(object):
 
+    names = ur.UnicodeDataReader.default.name()
     unassigned = ur.Set.general_category('Cn')  # "Unassigned"
 
     def __init__(self, value: typing.Any, min: int, max: int) -> None:
@@ -41,9 +32,14 @@ class Range(object):
 
     def name(self) -> str:
         if self.min == self.max:
-            return '{0}'.format(unicode_name(self.min))
-        return '{0}..{1}'.format(unicode_name(self.min),
-                                 unicode_name(self.max))
+            return '{0}'.format(Range.u_name(self.min))
+        return '{0}..{1}'.format(Range.u_name(self.min),
+                                 Range.u_name(self.max))
+
+    @staticmethod
+    def u_name(c: int) -> str:
+        name = Range.names.value(c)
+        return '' if name is None else name
 
     @staticmethod
     def ranges(get_value: Callable[[str], typing.Any]) -> Iterator["Range"]:
