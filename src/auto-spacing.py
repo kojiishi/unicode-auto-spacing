@@ -36,12 +36,27 @@ class AutoSpacing(object):
         letters_numerals -= ur.Set.scripts('Hangul')
         letters_numerals -= ur.Set.script_extensions('Hang')
 
+        conditional = ur.Set()
+        conditional |= ur.Set.general_category('Po')
+        conditional -= ur.Set.east_asian_width('F', 'H', 'W')
+        conditional.remove(0x0022)  # QUOTATION MARK
+        conditional.remove(0x0027)  # APOSTROPHE
+        conditional.remove(0x002A)  # ASTERISK
+        conditional.remove(0x002F)  # SOLIDUS
+        conditional.remove(0x00B7)  # MIDDLE DOT
+        conditional.remove(0x2020)  # DAGGER
+        conditional.remove(0x2021)  # DOUBLE DAGGER
+        conditional.remove(0x2026)  # HORIZONTAL ELLIPSIS
+
         self.ideographs = ideographs
         self.letters_numerals = letters_numerals
+        self.conditional = conditional
 
     def value(self, code: int) -> typing.Optional[str]:
         if code in self.ideographs:
             return 'W'
+        if code in self.conditional:
+            return 'C'
         if code in self.letters_numerals:
             return 'N'
         return None
