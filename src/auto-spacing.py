@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import argparse
 import typing
 import unicodedata_reader as ur
@@ -84,12 +85,12 @@ class AutoSpacing(object):
         parser = argparse.ArgumentParser()
         parser.add_argument('--tsv', action='store_true')
         parser.add_argument('-f',
-                            '--no-cache',
+                            '--clear-cache',
                             action='store_true',
-                            help='Disable the Unicode data cache.')
+                            help='Clear the Unicode data cache.')
         args = parser.parse_args()
-        if args.no_cache:
-            ur.UnicodeDataReader.is_caching_allowed = False
+        if args.clear_cache:
+            ur.UnicodeDataCachedReader.clear_cache()
         spacing = AutoSpacing()
         spacing.print(args)
 

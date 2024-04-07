@@ -1,3 +1,3 @@
 #!/bin/bash
-set -e
-python src/auto-spacing.py > auto-spacing.txt
+set -ex
+python3 src/auto-spacing.py "$@" > auto-spacing.txt
