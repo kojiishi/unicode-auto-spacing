@@ -11,10 +11,11 @@ class AutoSpacing(object):
         # Originally based on:
         # https://drafts.csswg.org/css-text-4/#text-spacing-classes
         ideographs = ur.Set()
-        for script, scx in (('Han', 'Hani'), ('Tangut', 'Tang'),
-                            ('Khitan_Small_Script',
-                             'Kits'), ('Nushu', 'Nshu'), ('Hiragana', 'Hira'),
-                            ('Katakana', 'Kana'), ('Bopomofo', 'Bopo')):
+        scripts = (('Han', 'Hani'), ('Tangut', 'Tang'),
+                   ('Khitan_Small_Script', 'Kits'), ('Nushu', 'Nshu'),
+                   ('Hiragana', 'Hira'), ('Katakana', 'Kana'), ('Bopomofo',
+                                                                'Bopo'))
+        for script, scx in scripts:
             ideographs |= ur.Set.scripts(script)
             ideographs |= ur.Set.script_extensions(scx)
         ideographs -= ur.Set.east_asian_width('H')
