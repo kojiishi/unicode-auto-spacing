@@ -91,9 +91,8 @@ class AutoSpacing(object):
             if args.tsv:
                 print('\t'.join(('U' + code, value, eaw, name)))
                 continue
-            line = '{0:14} ; {1}  # {2:2}  {3}'.format(code, value, eaw,
-                                                       name).rstrip()
-            print(line)
+            print('{0:14} ; {1}  # {2:2}  {3}'.format(code, value, eaw,
+                                                      name).rstrip())
 
     @staticmethod
     def main() -> None:
