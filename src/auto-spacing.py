@@ -57,7 +57,11 @@ class AutoSpacing(object):
 """
 
     def print(self, args: typing.Any) -> None:
-        if not args.tsv:
+        if args.tsv:
+            encodings = ['cp932', 'sjis_2004', 'cp936', 'cp949', 'cp950']
+            print('\t'.join(['Unicode', 'AS', 'EA', 'sc', *encodings, 'Name']))
+            sc_by_code = ur.UnicodeDataReader.default.scripts().to_dict()
+        else:
             print(self.headers)
         code_points = range(0, 0x110000)
 
@@ -90,7 +94,18 @@ class AutoSpacing(object):
             code = entry.range_as_str()
             name = entry.range_as_str(lambda c: name_by_code.get(c, ''))
             if args.tsv:
-                print('\t'.join(('U' + code, value, eaw, name)))
+                print_as_range = name.startswith('CJK ')
+                if print_as_range:
+                    row = [code, value, eaw, '', *([''] * len(encodings)), name]
+                    print('\t'.join(row))
+                    continue
+                for c in entry.range():
+                    row = [ur.u_hex(c), value, eaw, sc_by_code.get(c, '')]
+                    c_as_str = chr(c)
+                    for enc in encodings:
+                        row.append(ur.u_enc(c_as_str, enc))
+                    row.append(name_by_code.get(c, ''))
+                    print('\t'.join(row))
                 continue
             print('{0:14} ; {1}  # {2:2}  {3}'.format(code, value, eaw,
                                                       name).rstrip())
