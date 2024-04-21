@@ -1,19 +1,20 @@
+#!/usr/bin/env python3
 import argparse
 import typing
 import unicodedata_reader as ur
-from range import Range
 
 
 class AutoSpacing(object):
 
     def __init__(self) -> None:
-        # TODO: Read the data from Unicode to keep this up-to-date.
+        # Originally based on:
         # https://drafts.csswg.org/css-text-4/#text-spacing-classes
         ideographs = ur.Set()
-        for script, scx in (('Han', 'Hani'), ('Tangut', 'Tang'),
-                            ('Khitan_Small_Script',
-                             'Kits'), ('Nushu', 'Nshu'), ('Hiragana', 'Hira'),
-                            ('Katakana', 'Kana'), ('Bopomofo', 'Bopo')):
+        scripts = (('Han', 'Hani'), ('Tangut', 'Tang'),
+                   ('Khitan_Small_Script', 'Kits'), ('Nushu', 'Nshu'),
+                   ('Hiragana', 'Hira'), ('Katakana', 'Kana'), ('Bopomofo',
+                                                                'Bopo'))
+        for script, scx in scripts:
             ideographs |= ur.Set.scripts(script)
             ideographs |= ur.Set.script_extensions(scx)
         ideographs -= ur.Set.east_asian_width('H')
@@ -39,8 +40,7 @@ class AutoSpacing(object):
         self.ideographs = ideographs
         self.letters_numerals = letters_numerals
 
-    def value(self, ch: str) -> typing.Optional[str]:
-        code = ord(ch)
+    def value(self, code: int) -> typing.Optional[str]:
         if code in self.ideographs:
             return 'W'
         if code in self.letters_numerals:
@@ -60,38 +60,53 @@ class AutoSpacing(object):
     def print(self, args: typing.Any) -> None:
         if not args.tsv:
             print(self.headers)
-        east_asian_width = ur.UnicodeDataReader.default.east_asian_width()
-        get_value = lambda ch: (self.value(ch), east_asian_width.value(ord(ch))
-                                )
-        ranges = Range.ranges(get_value)
-        for range in ranges:
-            values = range.value
-            value = values[0]
-            eaw = values[1]
+        code_points = range(0, 0x110000)
+
+        # Make a list of pairs of (code, value).
+        #
+        # To make the AS list easy to compare with EA, the value is a tuple of
+        # (AS, EA). Tuples will be merged only when both values are the same.
+        eaw_by_code = ur.UnicodeDataReader.default.east_asian_width().to_dict()
+        unassigned = ur.Set.general_category('Cn')  # "Unassigned"
+
+        def to_pairs():
+            for code in code_points:
+                if code in unassigned:  # Skip unassigned code points.
+                    continue
+                yield (code, (self.value(code), eaw_by_code.get(code)))
+
+        # Convert the list to a list of tuples of min, max, and value.
+        entries = ur.UnicodeDataEntry.from_pairs(to_pairs())
+
+        name_by_code = ur.UnicodeDataReader.default.name().to_dict()
+        for entry in entries:
+            # Restore the value from a tuple of (AS, EA).
+            value, eaw = entry.value
             if value is None:
                 if eaw.startswith('N'):
-                    continue
+                    continue  # Omit printing `O` if `EA=N`.
                 value = 'O'
-            range.value = value
+            entry.value = value
+
+            code = entry.range_as_str()
+            name = entry.range_as_str(lambda c: name_by_code.get(c, ''))
             if args.tsv:
-                print('\t'.join(
-                    ('U' + range.code(), value, eaw, range.name())))
+                print('\t'.join(('U' + code, value, eaw, name)))
                 continue
-            print(
-                range.to_string(
-                    comment='{1:2}  {0}'.format(range.comment(), eaw)))
+            print('{0:14} ; {1}  # {2:2}  {3}'.format(code, value, eaw,
+                                                      name).rstrip())
 
     @staticmethod
     def main() -> None:
         parser = argparse.ArgumentParser()
         parser.add_argument('--tsv', action='store_true')
         parser.add_argument('-f',
-                            '--no-cache',
+                            '--clear-cache',
                             action='store_true',
-                            help='Disable the Unicode data cache.')
+                            help='Clear the Unicode data cache.')
         args = parser.parse_args()
-        if args.no_cache:
-            ur.UnicodeDataReader.is_caching_allowed = False
+        if args.clear_cache:
+            ur.UnicodeDataCachedReader.clear_cache()
         spacing = AutoSpacing()
         spacing.print(args)
 
