@@ -20,25 +20,19 @@ class AutoSpacing(object):
         # https://github.com/unicode-org/unicodetools/issues/768
         for script, scx in scripts:
             ideographs |= ur.Set.script_extensions(scx)
-        ideographs -= ur.Set.east_asian_width('N')
-        ideographs -= ur.Set.east_asian_width('Na')
+        ideographs -= ur.Set.east_asian_width('N', 'Na')
         for script, scx in scripts:
             ideographs |= ur.Set.scripts(script)
         ideographs -= ur.Set.east_asian_width('H')
-        ideographs -= ur.Set.general_category('P')
+        ideographs -= ur.Set.general_category('P', 'No')
         non_modifier_symbols = ur.Set.general_category('S')
         non_modifier_symbols -= ur.Set.general_category('Sk')
         ideographs -= non_modifier_symbols
-        ideographs -= ur.Set.general_category('No')
         ideographs.add(0x3013)  # GETA MARK
 
         letters_numerals = ur.Set()
-        letters_numerals |= ur.Set.general_category('L')
-        letters_numerals |= ur.Set.general_category('M')
-        letters_numerals |= ur.Set.general_category('Nd')
-        letters_numerals -= ur.Set.east_asian_width('F')
-        letters_numerals -= ur.Set.east_asian_width('H')
-        letters_numerals -= ur.Set.east_asian_width('W')
+        letters_numerals |= ur.Set.general_category('L', 'M', 'Nd')
+        letters_numerals -= ur.Set.east_asian_width('F', 'H', 'W')
         letters_numerals -= ur.Set.scripts('Hangul')
         letters_numerals -= ur.Set.script_extensions('Hang')
 
