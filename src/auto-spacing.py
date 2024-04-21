@@ -14,12 +14,17 @@ class AutoSpacing(object):
                    ('Khitan_Small_Script', 'Kits'), ('Nushu', 'Nshu'),
                    ('Hiragana', 'Hira'), ('Katakana', 'Kana'), ('Bopomofo',
                                                                 'Bopo'))
+        # For `ea=N|Na`, prioritize `sc` > `ea` > `scx`.
+        # * U+02EA-02EB should be 'W'. Its `sc=Bopo`.
+        # * U+A700-A707 should be `O`. Its `sc=Zyyy` and `scx=Hani|Latn`.
+        # https://github.com/unicode-org/unicodetools/issues/768
         for script, scx in scripts:
-            ideographs |= ur.Set.scripts(script)
             ideographs |= ur.Set.script_extensions(scx)
-        ideographs -= ur.Set.east_asian_width('H')
         ideographs -= ur.Set.east_asian_width('N')
         ideographs -= ur.Set.east_asian_width('Na')
+        for script, scx in scripts:
+            ideographs |= ur.Set.scripts(script)
+        ideographs -= ur.Set.east_asian_width('H')
         ideographs -= ur.Set.general_category('P')
         non_modifier_symbols = ur.Set.general_category('S')
         non_modifier_symbols -= ur.Set.general_category('Sk')
