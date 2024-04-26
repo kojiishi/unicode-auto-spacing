@@ -96,7 +96,9 @@ class AutoSpacing(object):
             if args.tsv:
                 print_as_range = name.startswith('CJK ')
                 if print_as_range:
-                    row = [code, value, eaw, '', *([''] * len(encodings)), name]
+                    row = [
+                        code, value, eaw, '', *([''] * len(encodings)), name
+                    ]
                     print('\t'.join(row))
                     continue
                 for c in entry.range():
