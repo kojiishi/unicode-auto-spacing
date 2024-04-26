@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import re
 import typing
 import unicodedata_reader as ur
 
@@ -94,10 +95,11 @@ class AutoSpacing(object):
             code = entry.range_as_str()
             name = entry.range_as_str(lambda c: name_by_code.get(c, ''))
             if args.tsv:
-                print_as_range = name.startswith('CJK ')
+                print_as_range = not name or name.endswith('-*') or re.search(
+                    r'-[\dA-F]+$', name)
                 if print_as_range:
                     row = [
-                        code, value, eaw, '', *([''] * len(encodings)), name
+                        code, value, eaw, *([''] * (len(encodings) + 1)), name
                     ]
                     print('\t'.join(row))
                     continue
