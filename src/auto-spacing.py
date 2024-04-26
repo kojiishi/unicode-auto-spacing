@@ -99,7 +99,9 @@ class AutoSpacing(object):
                     r'-[\dA-F]+$', name)
                 if print_as_range:
                     row = [
-                        code, value, eaw, *([''] * (len(encodings) + 1)), name
+                        code, value, eaw,
+                        self.value_if_common(sc_by_code, entry),
+                        *([''] * len(encodings)), name
                     ]
                     print('\t'.join(row))
                     continue
@@ -113,6 +115,17 @@ class AutoSpacing(object):
                 continue
             print('{0:14} ; {1}  # {2:2}  {3}'.format(code, value, eaw,
                                                       name).rstrip())
+
+    @staticmethod
+    def value_if_common(dict: typing.Dict[int, str],
+                        entry: ur.UnicodeDataEntry):
+        value = dict.get(entry.min)
+        if value is None:
+            return ''
+        for c in range(entry.min + 1, entry.max + 1):
+            if value != dict.get(c):
+                return ''
+        return value
 
     @staticmethod
     def main() -> None:
