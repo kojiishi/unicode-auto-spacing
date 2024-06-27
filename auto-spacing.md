@@ -229,8 +229,6 @@ fully derived property. Please see the Open Issues below.
     systems. Those characters having N will impact English text with Chinese characters.
   * Find a list of “code points that have less side effects” which both parties
     can reach consensus on.
-* A suggestion to use the Ideographic property is under discussion. The diff is
-  now very small as the algorithm evolves. See also #1.
 
 [UAX#11 EAST ASIAN WIDTH]: https://unicode.org/reports/tr11/
 [UAX#29]: https://www.unicode.org/reports/tr29/
