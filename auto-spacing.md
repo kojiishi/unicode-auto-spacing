@@ -1,10 +1,10 @@
-**Title**: Proposal of the UNICODE AUTO SPACING  
+**Title**: Proposal of the EAST ASIAN AUTO SPACING  
 **Authors**: Koji Ishii (Google), Yasuo Kida (W3C), Fuqiao Xue (W3C)  
 **Date**: Feb 28, 2024  
 **Original**: [L2/24-057](https://www.unicode.org/L2/L2024/24057-auto-spacing-prop.pdf)  
 **Supercedes**: [L2/23-283](https://www.unicode.org/L2/L2023/23283-auto-spacing-prop.pdf)
 
-# UNICODE AUTO SPACING (Proposal)
+# EAST ASIAN AUTO SPACING (Proposal)
 
 ## 1 Overview and Scope
 
