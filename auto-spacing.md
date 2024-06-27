@@ -63,12 +63,25 @@ For more information on the conformance implications, see [Unicode], Section
 ### 3.1 Property Values
 The possible property values are given in Table 1.
 
-Table 1. Property Values
-| Value | Description | Examples
-|---|---|---|
-| W | Characters that are considered as East Asian script for the auto-spacing purpose. | Han ideographic characters and Kana syllables are examples of this value. |
-| N | Characters that need the auto-spacing with adjacent W characters. | Latin letters and digits are examples of this value. |
-| O | Characters that don’t need the auto-spacing. | Most symbols and punctuation characters such as COMMA and FULL STOP are examples of this value. |
+<table>
+  <caption>Table 1. Property Values</caption>
+  <tr><th>Value</th><th>Description</th><th>Examples</th></tr>
+  <tr>
+    <td>W</td>
+    <td>Characters that are considered as East Asian script for the auto-spacing purpose.</td>
+    <td>Han ideographic characters and Kana syllables are examples of this value.</td>
+  </tr>
+  <tr>
+    <td>N</td>
+    <td>Characters that need the auto-spacing with adjacent W characters.</td>
+    <td>Latin letters and digits are examples of this value.</td>
+  </tr>
+  <tr>
+    <td>O</td>
+    <td>Characters that don’t need the auto-spacing.</td>
+    <td>Most symbols and punctuation characters such as COMMA and FULL STOP are examples of this value.</td>
+  </tr>
+</table>
 
 **NOTE**: A possible addition of “language conditional” is under discussion;
 specifically, “Conditional-Chinese N/O”. Please see Symbols and Punctuation
