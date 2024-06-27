@@ -68,18 +68,24 @@ The possible property values are given in Table 1.
   <tr><th>Value</th><th>Description</th><th>Examples</th></tr>
   <tr>
     <td>W</td>
-    <td>Characters that are considered as East Asian script for the auto-spacing purpose.</td>
+    <td>
+      Characters that are considered as East Asian script
+      for the auto-spacing purpose.
+    </td>
     <td>Han ideographic characters and Kana syllables are examples of this value.</td>
   </tr>
   <tr>
     <td>N</td>
-    <td>Characters that need the auto-spacing with adjacent W characters.</td>
+    <td>Characters that need the auto-spacing with adjacent “W” characters.</td>
     <td>Latin letters and digits are examples of this value.</td>
   </tr>
   <tr>
     <td>O</td>
     <td>Characters that don’t need the auto-spacing.</td>
-    <td>Most symbols and punctuation characters such as COMMA and FULL STOP are examples of this value.</td>
+    <td>
+      Most symbols and punctuation characters
+      such as COMMA and FULL STOP are examples of this value.
+    </td>
   </tr>
 </table>
 
@@ -87,12 +93,13 @@ The possible property values are given in Table 1.
 specifically, “Conditional-Chinese N/O”. Please see Symbols and Punctuation
 Characters for details.
 
-Characters that have the property value N are similar to the “Narrow” characters
-in [UAX#11 EAST ASIAN WIDTH], but most punctuation characters and symbols are
-excluded. Similarly, characters that have the property value W are similar to
+Characters that have the property value “N” are
+similar to the “Narrow” characters in [UAX#11 EAST ASIAN WIDTH],
+but most punctuation characters and symbols are excluded.
+Similarly, characters that have the property value “W” are similar to
 the “Wide” characters, but most punctuation characters and symbols are excluded.
 Also, to follow the existing practice, Hangul characters, circled characters,
-square characters, and Emoji are defined as O.
+square characters, and Emoji are defined as “O”.
 
 ### 3.2 Spacing Algorithm
 
@@ -104,7 +111,7 @@ or applications such as through markup or by the preferences of a layout
 application.
 
 There are two ways to represent a space: a character space (by the insertion of
-physical code points, or in a glyph space (like kerning, adjusting the metrics
+physical code points), or in a glyph space (like kerning, adjusting the metrics
 of adjacent glyphs on the device). A glyph space is recommended for high-level
 protocols or applications that can represent glyph spaces.
 
@@ -125,13 +132,13 @@ The property value for a grapheme cluster as a whole is then determined by
 taking the property value of the first character in the cluster, with the
 following exception:
 * If the cluster contains an enclosing combining mark (general category Me),
-then the whole cluster has the Auto_Spacing property value O.
+then the whole cluster has the Auto_Spacing property value “O”.
 
 #### 3.3.2 Space Characters
 
-The property values for space characters (General Category Zs) are O. This is to
-avoid inserting the auto spacing around space characters, which can lead to
-undesirable double spacing.
+The property values for space characters (General Category Zs) are “O”.
+This is to avoid inserting the auto spacing around space characters,
+which can lead to undesirable double spacing.
 
 It also allows authors to override the algorithm when high-level protocols or
 applications don’t provide a way for authors to express their intentions to
@@ -174,8 +181,9 @@ on this point.
 In vertical text layout, a character may be displayed upright or sideways
 rotated, as defined in [UAX#50].
 
-If a character that has the Auto_Spacing property value N is displayed upright,
-the rendering system should handle it as if it has the property value O instead.
+If a character that has the Auto_Spacing property value “N” is displayed upright,
+the rendering system should handle it
+as if it has the property value “O” instead.
 
 #### 3.3.5 Right-to-Left Scripts
 
