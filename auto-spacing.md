@@ -140,17 +140,27 @@ The property values for space characters (General Category Zs) are “O”.
 This is to avoid inserting the auto spacing around space characters,
 which can lead to undesirable double spacing.
 
-It also allows authors to override the algorithm when high-level protocols or
-applications don’t provide a way for authors to express their intentions to
-override this algorithm, such as in plain text files. For example, in East Asian
-contexts, U+0020 SPACE should usually represent a wider space than the auto
-spacing, indicating a semantic boundary stronger than the auto spacing, while
-U+2006 SIX-PER-EM SPACE should usually represent a thin space similar to the
-auto spacing for the readability. Inserting U+2006 SIX-PER-EM SPACE to where the
-algorithm doesn’t insert the auto spacing should indicate that the auto spacing
-is desired there. Likewise, inserting U+200B ZERO WIDTH SPACE to where the
-algorithm inserts the auto spacing should prevent the auto spacing from being
-inserted by rendering systems.
+It also allows authors to override the algorithm
+when high-level protocols or applications don’t provide a way
+for authors to express their intent to override this algorithm,
+such as plain text files.
+
+U+0020 SPACE indicates a semantic boundary,
+which is stronger than the spacing for the readability,
+Using the code point for the auto spacing purpose
+can make distinguishing semantic boundaries
+from the spacing for the readability difficult,
+and therefore it’s discouraged.
+
+U+2006 SIX-PER-EM SPACE should usually represent a thin space,
+which is suitable to represent the auto spacing for the readability.
+Inserting the code point
+to where the algorithm doesn’t insert the auto spacing
+should indicate that the auto spacing is desired there.
+
+Likewise, inserting U+200B ZERO WIDTH SPACE
+to where the algorithm inserts the auto spacing
+should prevent the auto spacing from being inserted by rendering systems.
 
 #### 3.3.3 Symbols and Punctuation Characters
 
