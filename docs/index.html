@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <title>Proposal of the EAST ASIAN AUTO SPACING</title>
 <style>
-dl {
+dl.meta {
   --col1: 12ch;
   dt {
     float: left;
@@ -18,11 +18,19 @@ dl {
   }
 }
 
-.note {
-  background: lightyellow;
-  padding: 5px;
-  &::before {
-    content: 'NOTE: ';
+table.simple {
+  margin-left: 32px;
+  margin-right: 32px;
+  caption {
+    font-weight: bold;
+  }
+  tr.heading {
+    td, th {
+      border-bottom: 1px solid gray;
+    }
+  }
+  td, th {
+    vertical-align: top;
   }
 }
 
@@ -42,7 +50,7 @@ ul.inline {
   }
 }
 </style>
-<dl>
+<dl class="meta">
   <dt>Title</dt>
   <dd>Proposal of the EAST ASIAN AUTO SPACING</dd>
   <dt>Authors</dt>
@@ -122,11 +130,11 @@ in particular the definition (D35) of an informative property.
 <p>
 The possible property values are given in Table 1.
 </p>
-<table>
+<table id="values" class="simple">
   <caption>Table 1. Property Values</caption>
-  <tr><th>Value</th><th>Description</th><th>Examples</th></tr>
+  <tr class="heading"><th>Value</th><th>Description</th><th>Examples</th></tr>
   <tr>
-    <td>W</td>
+    <th>W</th>
     <td>
       Characters that are considered as East Asian script
       for the auto-spacing purpose.
@@ -134,12 +142,12 @@ The possible property values are given in Table 1.
     <td>Han ideographic characters and Kana syllables are examples of this value.</td>
   </tr>
   <tr>
-    <td>N</td>
+    <th>N</th>
     <td>Characters that need the auto-spacing with adjacent “W” characters.</td>
     <td>Latin letters and digits are examples of this value.</td>
   </tr>
   <tr>
-    <td>O</td>
+    <th>O</th>
     <td>Characters that don’t need the auto-spacing.</td>
     <td>
       Most symbols and punctuation characters
@@ -147,7 +155,7 @@ The possible property values are given in Table 1.
     </td>
   </tr>
   <tr>
-    <td>C</td>
+    <th>C</th>
     <td>Characters that are “N” for Chinese and “O” for other languages.</td>
     <td>
       Characters that can appear as prefix or suffix of Latin letters or digits,
