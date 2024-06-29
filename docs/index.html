@@ -23,6 +23,22 @@ dl {
     content: 'NOTE: ';
   }
 }
+
+ul.inline {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  li {
+    display: inline;
+    list-style: none;
+  }
+  li::after {
+    content: ',';
+  }
+  li:last-of-type::after {
+    content: '.';
+  }
+}
 </style>
 <dl>
   <dt>Title</dt>
@@ -269,55 +285,75 @@ to be written vertically, such as Chorasmian.
 </p>
 <h2 id="data">4 Data File</h2>
 <p>
-<a href="https://github.com/kojiishi/unicode-auto-spacing/blob/main/auto-spacing.txt">
-  https://github.com/kojiishi/unicode-auto-spacing/blob/main/auto-spacing.txt
-</a>
-</p><p>
-Currently. the property values of this data file is derived from existing
-properties using the following algorithm (see NOTEs below):
+This property is derived by the following algorithm:
 </p>
-<ul>
-  <li>A code point has the property value W if it’s in the following set:
-    <ul>
-      <li>Include if the script property is one of the following values, or if the
-        script_extension property contains one of the following values:
-        <ul>
-          <li>Han, Tang, Kits, Nshu, Hira, Kana, Bopo</li>
+<ol>
+  <li>
+    Assign the property value “W” if it’s in the following set:
+    <ol>
+      <li>
+        Include if the Script property is one of the following values:
+        <ul class="inline">
+          <li>Bopomofo (Bopo)</li>
+          <li>Han (Hani)</li>
+          <li>Hiragana (Hira)</li>
+          <li>Katakana (Kana)</li>
+          <li>Khitan_Small_Script (Kits)</li>
+          <li>Nushu (Nshu)</li>
+          <li>Tangut (Tang)</li>
         </ul>
       </li>
       <li>
-        Excluding if the General Category property is one of following values:
-        <ul>
-          <li>P*, S* except Sk, No</li>
+        Include if the Script_Extensions property is one of the values above,
+        except when the East_Asian_Width property is “N” or “Na”.
+      </li>
+      <li>Exclude if the East_Asian_Width property is “H”.</li>
+      <li>Exclude if the General_Category property is “P” or “No”.</li>
+      <li>Exclude if the General_Category property is “S” except “Sk”.</li>
+      <li>Include the following code point:
+        <ul class="inline">
+          <li>U+3013 GETA MARK</li>
         </ul>
       </li>
-      <li>Excluding if the East_Asian_Width property is H.</li>
-    </ul>
+    </ol>
   </li>
-  <li>A code point has the property value N if it’s in the following set:
+  <li>
+    Otherwise, assign the property value “N” if it’s in the following set:
+    <ol>
+      <li>Include if the General_Category property is “L”, “M”, or “Nd”.</li>
+      <li>Exclude if the East_Asian_Width property is “F, “H”, or “W”.</li>
+      <li>Exclude if the Script property is “Hangul”.</li>
+      <li>Exclude if the Script_Extensions property is “Hang”.</li>
+    </ol>
+  </li>
+  <li>
+    Otherwise, assign the property value “C” if it’s in the following set:
     <ul>
-      <li>Include if the General Category property is one of following values:
-        <ul>
-          <li>L*, M*, Nd</li>
+      <li>Include if the General_Category property is “Po”.</li>
+      <li>Exclude if the East_Asian_Width property is “F”, “H”, or “W”.</li>
+      <li>Exclude the following code points:
+        <ul class="inline">
+          <li>U+0022 QUOTATION MARK</li>
+          <li>U+0027 APOSTROPHE</li>
+          <li>U+002A ASTERISK</li>
+          <li>U+002F SOLIDUS</li>
+          <li>U+00B7 MIDDLE DOT</li>
+          <li>U+2020 DAGGER</li>
+          <li>U+2021 DOUBLE DAGGER</li>
+          <li>U+2026 HORIZONTAL ELLIPSIS</li>
         </ul>
       </li>
-      <li>Excluding the set for the value W.</li>
-      <li>Excluding if the script property is Hang, or if the script extension
-        property contains Hang.</li>
-      <li>Excluding if the East_Asian_Width property is F or H.</li>
     </ul>
   </li>
-  <li>A code point has the property value O if it’s not in either set above.</li>
-</ul>
+  <li>Otherwise, assign the property value “O”.</li>
+</ol>
 <p>
-There is a
+The
+<a href="https://github.com/kojiishi/unicode-auto-spacing/blob/main/auto-spacing.txt">
+  derived data file</a>
+and a
 <a href="https://github.com/kojiishi/unicode-auto-spacing/blob/main/src/auto-spacing.py">
-  python code
-</a>
-that generated the data, for reference.
+  python code</a>
+are availble for references.
 </p>
-
-<div class="note">This algorithm isn’t final yet.</div>
-<div class="note">There is a possible addition of code point lists, making this not a
-fully derived property. Please see the Open Issues below.</div>
 </html>
