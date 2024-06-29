@@ -1,18 +1,26 @@
-**Title**: Proposal of the EAST ASIAN AUTO SPACING  
-**Authors**: Koji Ishii (Google), Yasuo Kida (W3C), Fuqiao Xue (W3C)  
-**Date**: Feb 28, 2024  
-**Original**: [L2/24-057](https://www.unicode.org/L2/L2024/24057-auto-spacing-prop.pdf)  
-**Supercedes**: [L2/23-283](https://www.unicode.org/L2/L2023/23283-auto-spacing-prop.pdf)
+<!DOCTYPE html>
+<dl>
+  <dt>Title</dt>
+  <dd>Proposal of the EAST ASIAN AUTO SPACING</dd>
+  <dt>Authors</dt>
+  <dd>Koji Ishii (Google), Yasuo Kida (W3C), Fuqiao Xue (W3C)</dd>
+  <dt>Date</dt>
+  <dd>Feb 28, 2024</dd>
+  <dt>Original</dt>
+  <dd><a href="https://www.unicode.org/L2/L2024/24057-auto-spacing-prop.pdf">L2/24-057</a></dd>
+  <dt>Supercedes</dt>
+  <dd><a href="https://www.unicode.org/L2/L2023/23283-auto-spacing-prop.pdf">L2/23-283</a></dd>
+</dl>
 
-# EAST ASIAN AUTO SPACING (Proposal)
+<h1>EAST ASIAN AUTO SPACING (Proposal)</h1>
 
-## 1 Overview and Scope
-
+<h2>1 Overview and Scope</h2>
+<p>
 East Asian text usually consists of multiple scripts, such as Han ideographs,
 Kana syllables, and Hangul syllables, along with Latin letters and numeric
 characters. In their established typography convention, a thin spacing between
 East Asian scripts and other scripts can improve the readability.
-
+</p><p>
 While detailed rules of the spacing can vary across documents, it is important
 that the choice made by an author for a specific document be clearly
 established, so that a rendering system can display what the author intended.
@@ -21,32 +29,32 @@ resources, as the rendering systems may have to use other fonts than those
 intended or specified in the document. Finally, the expression of the author’s
 choice should be relatively concise, to facilitate document authoring and
 minimize document size.
-
+</p><p>
 This report describes a Unicode character property which can serve as a stable
 default rule of inserting the spacing for the purpose of reliable document
 interchange.
-
+</p><p>
 For the purpose of reliable document interchange, this property defines an
 unambiguous default value, so that implementations could reliably render a
 character stream based solely on the property values, without depending on other
 information such as provided in the tables of the selected font.
-
+</p><p>
 The intent is that the author should be able to specify where they want to
 override, and that in the absence of an explicit specification, the spacing is
 implicitly that defined by the property presented in this report.
-
+</p><p>
 The actual choice for the property values should result in a reasonable or
 legible default, but it may not be publishing-material quality, and it may not
 be a good choice if used in a specific style or context.
-
+</p><p>
 The property values are chosen first to match existing practice in East Asian
 contexts in their respective environments. For characters that are not generally
 used in such environments, similarity to existing characters has been taken into
 consideration. It also takes East Asian characters in non-East Asian texts into
 account.
-
-## 2 Conformance
-
+</p>
+<h2>2 Conformance</h2>
+<p>
 The property defined in this report is informative. The intent of this report is
 to provide, in the absence of other information, a reasonable way to determine
 the correct automatic spacing, but this behavior can be overridden by inserting
@@ -54,15 +62,16 @@ space characters, or by a higher-level protocol, such as through markup or by
 the preferences of a layout application. This default determination is defined
 in the accompanying data file [Data], but in no way implies that the spacing is
 inserted only by this rule.
-
+</p><p>
 For more information on the conformance implications, see [Unicode], Section
 3.5, Properties, in particular the definition (D35) of an informative property.
+</p>
+<h2>3 The Auto_Spacing Property (as)</h2>
 
-## 3 The Auto_Spacing Property (as)
-
-### 3.1 Property Values
+<h3>3.1 Property Values</h3>
+<p>
 The possible property values are given in Table 1.
-
+</p>
 <table>
   <caption>Table 1. Property Values</caption>
   <tr><th>Value</th><th>Description</th><th>Examples</th></tr>
@@ -96,89 +105,96 @@ The possible property values are given in Table 1.
     </td>
   </tr>
 </table>
-
+<p>
 **NOTE**: A possible addition of “language conditional” is under discussion;
 specifically, “Conditional-Chinese N/O”. Please see Symbols and Punctuation
 Characters for details.
-
+</p><p>
 Characters that have the property value “N” are
-similar to the “Narrow” characters in [UAX#11 EAST ASIAN WIDTH],
+similar to the “Narrow” characters in
+<a href="https://unicode.org/reports/tr11/">UAX#11 EAST ASIAN WIDTH</a>,
 but most punctuation characters and symbols are excluded.
 Similarly, characters that have the property value “W” are similar to
 the “Wide” characters, but most punctuation characters and symbols are excluded.
 Also, to follow the existing practice, Hangul characters, circled characters,
 square characters, and Emoji are defined as “O”.
-
+</p><p>
 The value “C” stands for “conditional”.
 Please see 3.2.3 Symbols and Punctuation Characters for more details.
-
-### 3.2 Spacing Algorithm
-
+</p>
+<h3>3.2 Spacing Algorithm</h3>
+<p>
 The auto spacing should be inserted between “W” and “N”, and between “N” and “W”,
 after resolving the conditional value “C” to “N” or “O”.
-
+</p><p>
 The exact amount of the spacing can vary across documents. This property doesn’t
 define the exact amount. Instead, it should be defined by high-level protocols
 or applications such as through markup or by the preferences of a layout
 application.
-
+</p><p>
 There are two ways to represent a space: a character space (by the insertion of
 physical code points), or in a glyph space (like kerning, adjusting the metrics
 of adjacent glyphs on the device). A glyph space is recommended for high-level
 protocols or applications that can represent glyph spaces.
+</p>
+<h3>3.3 Scope of the Property</h3>
 
-### 3.3 Scope of the Property
-
-#### 3.3.1 Grapheme Cluster
-
+<h4>3.3.1 Grapheme Cluster</h4>
+<p>
 As in all matters of typography, the interesting unit of text is not the
 character, but a grapheme cluster: it does not make sense to insert the auto
 spacing between a base character and a combining mark attached to it.
 Implementations should insert the auto spacing before or after each grapheme
 cluster.
-
+</p><p>
 A possible choice for the notion of grapheme cluster is either that of legacy
-grapheme cluster or that of extended grapheme cluster, as defined in [UAX#29].
-
+grapheme cluster or that of extended grapheme cluster, as defined in
+<a href="https://www.unicode.org/reports/tr29/">UAX#29</a>.
+</p><p>
 The property value for a grapheme cluster as a whole is then determined by
 taking the property value of the first character in the cluster, with the
 following exception:
-* If the cluster contains an enclosing combining mark (general category Me),
-then the whole cluster has the Auto_Spacing property value “O”.
+</p>
+<ul>
+  <li>
+    If the cluster contains an enclosing combining mark (general category Me),
+    then the whole cluster has the Auto_Spacing property value “O”.
+  </li>
+</ul>
 
-#### 3.3.2 Space Characters
-
+<h4>3.3.2 Space Characters</h4>
+<p>
 The property values for space characters (General Category Zs) are “O”.
 This is to avoid inserting the auto spacing around space characters,
 which can lead to undesirable double spacing.
-
+</p><p>
 It also allows authors to override the algorithm
 when high-level protocols or applications don’t provide a way
 for authors to express their intent to override this algorithm,
 such as plain text files.
-
+</p><p>
 U+0020 SPACE indicates a semantic boundary,
 which is stronger than the spacing for the readability,
 Using the code point for the auto spacing purpose
 can make distinguishing semantic boundaries
 from the spacing for the readability difficult,
 and therefore it’s discouraged.
-
+</p><p>
 U+2006 SIX-PER-EM SPACE should usually represent a thin space,
 which is suitable to represent the auto spacing for the readability.
 Inserting the code point
 to where the algorithm doesn’t insert the auto spacing
 should indicate that the auto spacing is desired there.
-
+</p><p>
 Likewise, inserting U+200B ZERO WIDTH SPACE
 to where the algorithm inserts the auto spacing
 should prevent the auto spacing from being inserted by rendering systems.
-
-#### 3.3.3 Symbols and Punctuation Characters
-
+</p>
+<h4>3.3.3 Symbols and Punctuation Characters</h4>
+<p>
 In some existing practices, symbols and punctuation characters insert the auto
 spacing, while they don’t insert the auto spacing in other existing practices.
-
+</p><p>
 When some punctuation characters appear as prefix or suffix of a word,
 such as “20%”, “$20”, or “C#”,
 some existing practices
@@ -187,69 +203,87 @@ prefer inserting the spacing to both sides of them.
 For example,
 one existing implementation inserts a space
 between any wide and narrow characters with some exceptions.
-
+</p><p>
 On the other hand, traditional printing typography often considers
 such unbalanced spacing as good results,
 from the perspective that
 the spacing is to prevent characters from being too close together,
 not to highlight words as parentheses do.
-
+</p><p>
 The conditional value “C” is assigned to such characters.
 Chinese content often prefers more spacing,
 and thus they should resolve “C” to “N”,
 while other content should resolve “C” to “O”.
-
+</p><p>
 If the author is uncertain
 whether their content is used in Chinese context or not,
 and they want to express their intentions,
 they can override the algorithm as described in 3.3.2 Space Characters.
-
-#### 3.3.4 Vertical Text Layout
-
+</p>
+<h4>3.3.4 Vertical Text Layout</h4>
+<p>
 In vertical text layout, a character may be displayed upright or sideways
-rotated, as defined in [UAX#50].
-
+rotated, as defined in <a href="https://unicode.org/reports/tr50/">UAX#50</a>.
+</p><p>
 If a character that has the Auto_Spacing property value “N” is displayed upright,
 the rendering system should handle it
 as if it has the property value “O” instead.
-
-#### 3.3.5 Right-to-Left Scripts
-
+</p>
+<h4>3.3.5 Right-to-Left Scripts</h4>
+<p>
 This property has a current limitation in that the handling of right-to-left
 scripts is not specified. This includes scripts that are predominantly written
 right to left, such as Arabic, along with right-to-left scripts that are meant
 to be written vertically, such as Chorasmian.
-
-## 4 Data File
-
-https://github.com/kojiishi/unicode-auto-spacing/blob/main/auto-spacing.txt
-
+</p>
+<h2>4 Data File</h2>
+<p>
+<a href="https://github.com/kojiishi/unicode-auto-spacing/blob/main/auto-spacing.txt">
+  https://github.com/kojiishi/unicode-auto-spacing/blob/main/auto-spacing.txt
+</a>
+</p><p>
 Currently. the property values of this data file is derived from existing
 properties using the following algorithm (see NOTEs below):
-* A code point has the property value W if it’s in the following set:
-  * Include if the script property is one of the following values, or if the
-    script_extension property contains one of the following values:
-    * Han, Tang, Kits, Nshu, Hira, Kana, Bopo
-  * Excluding if the General Category property is one of following values:
-    * P*, S* except Sk, No
-  * Excluding if the East_Asian_Width property is H.
-* A code point has the property value N if it’s in the following set:
-  * Include if the General Category property is one of following values:
-    * L*, M*, Nd
-  * Excluding the set for the value W.
-  * Excluding if the script property is Hang, or if the script extension
-    property contains Hang.
-  * Excluding if the East_Asian_Width property is F or H.
-* A code point has the property value O if it’s not in either set above.
-
+</p>
+<ul>
+  <li>A code point has the property value W if it’s in the following set:
+    <ul>
+      <li>Include if the script property is one of the following values, or if the
+        script_extension property contains one of the following values:
+        <ul>
+          <li>Han, Tang, Kits, Nshu, Hira, Kana, Bopo</li>
+        </ul>
+      </li>
+      <li>
+        Excluding if the General Category property is one of following values:
+        <ul>
+          <li>P*, S* except Sk, No</li>
+        </ul>
+      </li>
+      <li>Excluding if the East_Asian_Width property is H.</li>
+    </ul>
+  </li>
+  <li>A code point has the property value N if it’s in the following set:
+    <ul>
+      <li>Include if the General Category property is one of following values:
+        <ul>
+          <li>L*, M*, Nd</li>
+        </ul>
+      </li>
+      <li>Excluding the set for the value W.</li>
+      <li>Excluding if the script property is Hang, or if the script extension
+        property contains Hang.</li>
+      <li>Excluding if the East_Asian_Width property is F or H.</li>
+    </ul>
+  </li>
+  <li>A code point has the property value O if it’s not in either set above.</li>
+</ul>
+<p>
 There is a
 [python code](https://github.com/kojiishi/unicode-auto-spacing/blob/main/src/auto-spacing.py)
 that generated the data, for reference.
+</p>
 
-**NOTE**: This algorithm isn’t final yet.  
-**NOTE**: There is a possible addition of code point lists, making this not a
-fully derived property. Please see the Open Issues below.
-
-[UAX#11 EAST ASIAN WIDTH]: https://unicode.org/reports/tr11/
-[UAX#29]: https://www.unicode.org/reports/tr29/
-[UAX#50]: https://unicode.org/reports/tr50/
+<div class="note">This algorithm isn’t final yet.</div>
+<div class="note">There is a possible addition of code point lists, making this not a
+fully derived property. Please see the Open Issues below.</div>
