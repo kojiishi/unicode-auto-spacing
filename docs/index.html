@@ -85,11 +85,14 @@ to provide, in the absence of other information, a reasonable way to determine
 the correct automatic spacing, but this behavior can be overridden by inserting
 space characters, or by a higher-level protocol, such as through markup or by
 the preferences of a layout application. This default determination is defined
-in the accompanying data file [Data], but in no way implies that the spacing is
+in the accompanying data file <a href="#data">Data</a>,
+but in no way implies that the spacing is
 inserted only by this rule.
 </p><p>
-For more information on the conformance implications, see [Unicode], Section
-3.5, Properties, in particular the definition (D35) of an informative property.
+For more information on the conformance implications, see
+<a href="https://www.unicode.org/versions/latest/">Unicode</a>,
+Section 3.5, Properties,
+in particular the definition (D35) of an informative property.
 </p>
 <h2>3 The Auto_Spacing Property (as)</h2>
 
@@ -145,7 +148,9 @@ Also, to follow the existing practice, Hangul characters, circled characters,
 square characters, and Emoji are defined as “O”.
 </p><p>
 The value “C” stands for “conditional”.
-Please see 3.2.3 Symbols and Punctuation Characters for more details.
+Please see
+<a href="#symbols-punctuation">3.2.3 Symbols and Punctuation Characters</a>
+for more details.
 </p>
 <h3>3.2 Spacing Algorithm</h3>
 <p>
@@ -187,7 +192,7 @@ following exception:
   </li>
 </ul>
 
-<h4>3.3.2 Space Characters</h4>
+<h4 id="space">3.3.2 Space Characters</h4>
 <p>
 The property values for space characters (General Category Zs) are “O”.
 This is to avoid inserting the auto spacing around space characters,
@@ -215,7 +220,7 @@ Likewise, inserting U+200B ZERO WIDTH SPACE
 to where the algorithm inserts the auto spacing
 should prevent the auto spacing from being inserted by rendering systems.
 </p>
-<h4>3.3.3 Symbols and Punctuation Characters</h4>
+<h4 id="symbols-punctuation">3.3.3 Symbols and Punctuation Characters</h4>
 <p>
 In some existing practices, symbols and punctuation characters insert the auto
 spacing, while they don’t insert the auto spacing in other existing practices.
@@ -243,7 +248,8 @@ while other content should resolve “C” to “O”.
 If the author is uncertain
 whether their content is used in Chinese context or not,
 and they want to express their intentions,
-they can override the algorithm as described in 3.3.2 Space Characters.
+they can override the algorithm as described in
+<a href="#space">3.3.2 Space Characters</a>.
 </p>
 <h4>3.3.4 Vertical Text Layout</h4>
 <p>
@@ -261,7 +267,7 @@ scripts is not specified. This includes scripts that are predominantly written
 right to left, such as Arabic, along with right-to-left scripts that are meant
 to be written vertically, such as Chorasmian.
 </p>
-<h2>4 Data File</h2>
+<h2 id="data">4 Data File</h2>
 <p>
 <a href="https://github.com/kojiishi/unicode-auto-spacing/blob/main/auto-spacing.txt">
   https://github.com/kojiishi/unicode-auto-spacing/blob/main/auto-spacing.txt
@@ -305,7 +311,9 @@ properties using the following algorithm (see NOTEs below):
 </ul>
 <p>
 There is a
-[python code](https://github.com/kojiishi/unicode-auto-spacing/blob/main/src/auto-spacing.py)
+<a href="https://github.com/kojiishi/unicode-auto-spacing/blob/main/src/auto-spacing.py">
+  python code
+</a>
 that generated the data, for reference.
 </p>
 
