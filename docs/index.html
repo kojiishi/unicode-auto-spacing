@@ -45,6 +45,8 @@ East Asian text usually consists of multiple scripts, such as Han ideographs,
 Kana syllables, and Hangul syllables, along with Latin letters and numeric
 characters. In their established typography convention, a thin spacing between
 East Asian scripts and other scripts can improve the readability.
+This spacing should be represented by glyph spaces similar to kerning,
+not by space characters.
 </p><p>
 While detailed rules of the spacing can vary across documents, it is important
 that the choice made by an author for a specific document be clearly
@@ -158,10 +160,12 @@ define the exact amount. Instead, it should be defined by high-level protocols
 or applications such as through markup or by the preferences of a layout
 application.
 </p><p>
-There are two ways to represent a space: a character space (by the insertion of
-physical code points), or in a glyph space (like kerning, adjusting the metrics
-of adjacent glyphs on the device). A glyph space is recommended for high-level
-protocols or applications that can represent glyph spaces.
+There are two ways to represent a space:
+a character space (by the insertion of physical code points),
+or in a glyph space (similar to kerning,
+adjusting the metrics of adjacent glyphs on the device).
+A glyph space is recommended
+for high-level protocols or applications that can represent glyph spaces.
 </p>
 <h3>3.3 Scope of the Property</h3>
 
