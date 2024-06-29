@@ -87,6 +87,14 @@ The possible property values are given in Table 1.
       such as COMMA and FULL STOP are examples of this value.
     </td>
   </tr>
+  <tr>
+    <td>C</td>
+    <td>Characters that are “N” for Chinese and “O” for other languages.</td>
+    <td>
+      Characters that can appear as prefix or suffix of Latin letters or digits,
+      such as U+0025 PERCENT SIGN.
+    </td>
+  </tr>
 </table>
 
 **NOTE**: A possible addition of “language conditional” is under discussion;
@@ -101,9 +109,13 @@ the “Wide” characters, but most punctuation characters and symbols are exclu
 Also, to follow the existing practice, Hangul characters, circled characters,
 square characters, and Emoji are defined as “O”.
 
+The value “C” stands for “conditional”.
+Please see 3.2.3 Symbols and Punctuation Characters for more details.
+
 ### 3.2 Spacing Algorithm
 
-The auto spacing should be inserted between “W” and “N”, and between “N” and “W”.
+The auto spacing should be inserted between “W” and “N”, and between “N” and “W”,
+after resolving the conditional value “C” to “N” or “O”.
 
 The exact amount of the spacing can vary across documents. This property doesn’t
 define the exact amount. Instead, it should be defined by high-level protocols
@@ -167,24 +179,30 @@ should prevent the auto spacing from being inserted by rendering systems.
 In some existing practices, symbols and punctuation characters insert the auto
 spacing, while they don’t insert the auto spacing in other existing practices.
 
-The motivation to insert the auto-spacing is that words such as “20%”, “$20”, or
-“C#” would look unbalanced if the auto-spacing is inserted to the letters and
-digits but not to the symbols and punctuation characters. It also matches the
-existing practice of widely adopted style guides for East Asian plain text
-defining to insert U+0020 SPACE between any wide and narrow characters with some
-exceptions. Large amount of existing plain text files in East Asian writing
-systems follow this convention for over decades, and one of existing
-implementations as well.
+When some punctuation characters appear as prefix or suffix of a word,
+such as “20%”, “$20”, or “C#”,
+some existing practices
+consider not doing so look unbalanced, and
+prefer inserting the spacing to both sides of them.
+For example,
+one existing implementation inserts a space
+between any wide and narrow characters with some exceptions.
 
-On the other hand, traditional printing typography often accepts such unbalanced
-spacing as good results, from a perspective that the spacing is to prevent
-characters from being too close together, not to highlight words like
-parentheses do
-[JLREQ-TF](https://github.com/w3c/csswg-drafts/issues/9479#issuecomment-1945496285).
-Another existing implementation follows this convention for over decades too.
+On the other hand, traditional printing typography often considers
+such unbalanced spacing as good results,
+from the perspective that
+the spacing is to prevent characters from being too close together,
+not to highlight words as parentheses do.
 
-Please see the “Open Issues” section for more information and possible options
-on this point.
+The conditional value “C” is assigned to such characters.
+Chinese content often prefers more spacing,
+and thus they should resolve “C” to “N”,
+while other content should resolve “C” to “O”.
+
+If the author is uncertain
+whether their content is used in Chinese context or not,
+and they want to express their intentions,
+they can override the algorithm as described in 3.3.2 Space Characters.
 
 #### 3.3.4 Vertical Text Layout
 
@@ -231,22 +249,6 @@ that generated the data, for reference.
 **NOTE**: This algorithm isn’t final yet.  
 **NOTE**: There is a possible addition of code point lists, making this not a
 fully derived property. Please see the Open Issues below.
-
-# 5 Open Issues
-
-* One existing implementation defines some symbols and punctuation characters as
-  N. An example is U+0025 PERCENT SIGN, so that a word such as “200%” can have
-  the auto spacing on both sides, and there are more such code points than “%”.
-  See also “3.3.2 Symbols and Punctuation Characters” and #11.
-  * Not to include symbols and punctuation characters. This matches one existing
-    implementation and the JLREQ proposal.
-  * Take the CLREQ proposal. This inserts the auto space in a lot more cases
-    than all existing implementations. The current differences in the data file are listed here.
-  * Define a language conditional value to accept both CLREQ and JLREQ
-    proposals. That value will work as N for Chinese and O for other writing
-    systems. Those characters having N will impact English text with Chinese characters.
-  * Find a list of “code points that have less side effects” which both parties
-    can reach consensus on.
 
 [UAX#11 EAST ASIAN WIDTH]: https://unicode.org/reports/tr11/
 [UAX#29]: https://www.unicode.org/reports/tr29/
