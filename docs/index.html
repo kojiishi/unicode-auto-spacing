@@ -1,4 +1,29 @@
 <!DOCTYPE html>
+<html lang="en">
+<style>
+dl {
+  --col1: 12ch;
+  dt {
+    float: left;
+    font-weight: bold;
+    width: var(--col1);
+  }
+  dt::after {
+    content: ':'
+  }
+  dd {
+    margin-left: var(--col1);
+  }
+}
+
+.note {
+  background: lightyellow;
+  padding: 5px;
+  &::before {
+    content: 'NOTE: ';
+  }
+}
+</style>
 <dl>
   <dt>Title</dt>
   <dd>Proposal of the EAST ASIAN AUTO SPACING</dd>
@@ -287,3 +312,4 @@ that generated the data, for reference.
 <div class="note">This algorithm isn’t final yet.</div>
 <div class="note">There is a possible addition of code point lists, making this not a
 fully derived property. Please see the Open Issues below.</div>
+</html>
