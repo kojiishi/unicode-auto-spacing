@@ -320,6 +320,7 @@ This property is derived by the following algorithm:
         <ul class="inline">
           <li>Bopomofo (Bopo)</li>
           <li>Han (Hani)</li>
+          <li>Hangul (Hang)</li>
           <li>Hiragana (Hira)</li>
           <li>Katakana (Kana)</li>
           <li>Khitan_Small_Script (Kits)</li>
@@ -365,8 +366,6 @@ This property is derived by the following algorithm:
     <ol>
       <li>Include if the General_Category property is “L”, “M”, or “Nd”.</li>
       <li>Exclude if the East_Asian_Width property is “F, “H”, or “W”.</li>
-      <li>Exclude if the Script property is “Hangul”.</li>
-      <li>Exclude if the Script_Extensions property is “Hang”.</li>
     </ol>
   </li>
   <li>Otherwise, assign the property value “O”.</li>
