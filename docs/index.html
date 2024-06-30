@@ -334,15 +334,6 @@ This property is derived by the following algorithm:
     </ol>
   </li>
   <li>
-    Otherwise, assign the property value “N” if it’s in the following set:
-    <ol>
-      <li>Include if the General_Category property is “L”, “M”, or “Nd”.</li>
-      <li>Exclude if the East_Asian_Width property is “F, “H”, or “W”.</li>
-      <li>Exclude if the Script property is “Hangul”.</li>
-      <li>Exclude if the Script_Extensions property is “Hang”.</li>
-    </ol>
-  </li>
-  <li>
     Otherwise, assign the property value “C” if it’s in the following set:
     <ul>
       <li>Include if the General_Category property is “Po”.</li>
@@ -360,6 +351,15 @@ This property is derived by the following algorithm:
         </ul>
       </li>
     </ul>
+  </li>
+  <li>
+    Otherwise, assign the property value “N” if it’s in the following set:
+    <ol>
+      <li>Include if the General_Category property is “L”, “M”, or “Nd”.</li>
+      <li>Exclude if the East_Asian_Width property is “F, “H”, or “W”.</li>
+      <li>Exclude if the Script property is “Hangul”.</li>
+      <li>Exclude if the Script_Extensions property is “Hang”.</li>
+    </ol>
   </li>
   <li>Otherwise, assign the property value “O”.</li>
 </ol>
