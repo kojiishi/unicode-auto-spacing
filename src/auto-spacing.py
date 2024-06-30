@@ -18,6 +18,7 @@ class AutoSpacing(object):
         scripts += [('Khitan_Small_Script', 'Kits')]
         scripts += [('Nushu', 'Nshu')]
         scripts += [('Tangut', 'Tang')]
+        scripts += [('Yi', 'Yiii')]
         # For `ea=N|Na`, prioritize `sc` > `ea` > `scx`.
         # * U+02EA-02EB should be 'W'. Its `sc=Bopo`.
         # * U+A700-A707 should be `O`. Its `sc=Zyyy` and `scx=Hani|Latn`.
