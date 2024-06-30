@@ -136,9 +136,15 @@ The possible property values are given in Table 1.
 </p>
 <table id="values" class="simple">
   <caption>Table 1. Property Values</caption>
-  <tr class="heading"><th>Value</th><th>Description</th><th>Examples</th></tr>
+  <tr class="heading">
+    <th>Value</th>
+    <th>Short Name</th>
+    <th>Description</th>
+    <th>Examples</th>
+  </tr>
   <tr>
     <th>W</th>
+    <td>Wide</td>
     <td>
       Characters that are considered as East Asian script
       for the auto-spacing purpose.
@@ -147,11 +153,13 @@ The possible property values are given in Table 1.
   </tr>
   <tr>
     <th>N</th>
+    <td>Narrow</td>
     <td>Characters that need the auto-spacing with adjacent “W” characters.</td>
     <td>Latin letters and digits are examples of this value.</td>
   </tr>
   <tr>
     <th>O</th>
+    <td>Other</td>
     <td>Characters that don’t need the auto-spacing.</td>
     <td>
       Most symbols and punctuation characters
@@ -160,6 +168,7 @@ The possible property values are given in Table 1.
   </tr>
   <tr>
     <th>C</th>
+    <td>Conditional</td>
     <td>Characters that are “N” for Chinese and “O” for other languages.</td>
     <td>
       Characters that can appear as prefix or suffix of Latin letters or digits,
@@ -177,8 +186,7 @@ the “Wide” characters, but most punctuation characters and symbols are exclu
 Also, to follow the existing practice, Hangul characters, circled characters,
 square characters, and Emoji are defined as “O”.
 </p><p>
-The value “C” stands for “conditional”.
-Please see
+For the value “C”, please refer to
 <a href="#symbols-punctuation">3.2.3 Symbols and Punctuation Characters</a>
 for more details.
 </p>
