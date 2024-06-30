@@ -184,7 +184,7 @@ for more details.
 </p>
 <h3>3.2 Spacing Algorithm</h3>
 <p>
-The auto spacing should be inserted between “W” and “N”, and between “N” and “W”,
+The auto-spacing should be inserted between “W” and “N”, and between “N” and “W”,
 after resolving the conditional value “C” to “N” or “O”.
 </p><p>
 The exact amount of the spacing can vary across documents. This property doesn’t
@@ -206,7 +206,7 @@ for high-level protocols or applications that can represent glyph spaces.
 As in all matters of typography, the interesting unit of text is not the
 character, but a grapheme cluster: it does not make sense to insert the auto
 spacing between a base character and a combining mark attached to it.
-Implementations should insert the auto spacing before or after each grapheme
+Implementations should insert the auto-spacing before or after each grapheme
 cluster.
 </p><p>
 A possible choice for the notion of grapheme cluster is either that of legacy
@@ -227,7 +227,7 @@ following exception:
 <h4 id="space-char">3.3.2 Space Characters</h4>
 <p>
 The property values for space characters (General Category Zs) are “O”.
-This is to avoid inserting the auto spacing around space characters,
+This is to avoid inserting the auto-spacing around space characters,
 which can lead to undesirable double spacing.
 </p><p>
 It also allows authors to override the algorithm
@@ -237,25 +237,25 @@ such as plain text files.
 </p><p>
 U+0020 SPACE indicates a semantic boundary,
 which is stronger than the spacing for the readability.
-Using the code point for the auto spacing purpose
+Using the code point for the auto-spacing purpose
 can make distinguishing semantic boundaries
 from the spacing for the readability difficult,
 and therefore it’s discouraged.
 </p><p>
 U+2006 SIX-PER-EM SPACE should usually represent a thin space,
-which is suitable to represent the auto spacing for the readability.
+which is suitable to represent the auto-spacing for the readability.
 Inserting the code point
-to where the algorithm doesn’t insert the auto spacing
-should indicate that the auto spacing is desired there.
+to where the algorithm doesn’t insert the auto-spacing
+should indicate that the auto-spacing is desired there.
 </p><p>
 Likewise, inserting U+200B ZERO WIDTH SPACE
-to where the algorithm inserts the auto spacing
-should prevent the auto spacing from being inserted by rendering systems.
+to where the algorithm inserts the auto-spacing
+should prevent the auto-spacing from being inserted by rendering systems.
 </p>
 <h4 id="symbols-punctuation">3.3.3 Symbols and Punctuation Characters</h4>
 <p>
 In some existing practices, symbols and punctuation characters insert the auto
-spacing, while they don’t insert the auto spacing in other existing practices.
+spacing, while they don’t insert the auto-spacing in other existing practices.
 </p><p>
 When some punctuation characters appear as prefix or suffix of a word,
 such as “20%”, “$20”, or “C#”,
