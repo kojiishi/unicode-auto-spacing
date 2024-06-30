@@ -254,17 +254,17 @@ should prevent the auto-spacing from being inserted by rendering systems.
 </p>
 <h4 id="symbols-punctuation">3.3.3 Symbols and Punctuation Characters</h4>
 <p>
-In some existing practices, symbols and punctuation characters insert the auto
-spacing, while they don’t insert the auto-spacing in other existing practices.
+In some existing practices,
+symbols and punctuation characters insert the spacing,
+while they don’t in other existing practices.
 </p><p>
-When some punctuation characters appear as prefix or suffix of a word,
+For example, when one side of a word is a letter or a digit
+and the other side is a punctuation character,
 such as “20%”, “$20”, or “C#”,
+and they appear adjacent to “W” characters,
 some existing practices
 prefer inserting the spacing to both sides of them,
 considering that not doing so look unbalanced.
-For example,
-one existing implementation inserts a space
-between any wide and narrow characters with some exceptions.
 </p><p>
 On the other hand, traditional printing typography often considers
 such unbalanced spacing as good results,
@@ -273,7 +273,7 @@ the spacing is to prevent characters from being too close together,
 not to highlight words as parentheses do.
 </p><p>
 The conditional value “C” is assigned to such characters.
-Chinese content often prefers more spacing,
+Chinese content often prefers the spacing in such cases,
 and thus they should resolve “C” to “N”,
 while other content should resolve “C” to “O”.
 </p><p>
