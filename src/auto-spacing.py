@@ -8,13 +8,15 @@ import unicodedata_reader as ur
 class AutoSpacing(object):
 
     def __init__(self) -> None:
-        # Originally based on:
-        # https://drafts.csswg.org/css-text-4/#text-spacing-classes
         ideographs = ur.Set()
-        scripts = (('Han', 'Hani'), ('Tangut', 'Tang'),
-                   ('Khitan_Small_Script', 'Kits'), ('Nushu', 'Nshu'),
-                   ('Hiragana', 'Hira'), ('Katakana', 'Kana'), ('Bopomofo',
-                                                                'Bopo'))
+        scripts = []
+        scripts += [('Bopomofo', 'Bopo')]
+        scripts += [('Han', 'Hani')]
+        scripts += [('Hiragana', 'Hira')]
+        scripts += [('Katakana', 'Kana')]
+        scripts += [('Khitan_Small_Script', 'Kits')]
+        scripts += [('Nushu', 'Nshu')]
+        scripts += [('Tangut', 'Tang')]
         # For `ea=N|Na`, prioritize `sc` > `ea` > `scx`.
         # * U+02EA-02EB should be 'W'. Its `sc=Bopo`.
         # * U+A700-A707 should be `O`. Its `sc=Zyyy` and `scx=Hani|Latn`.
