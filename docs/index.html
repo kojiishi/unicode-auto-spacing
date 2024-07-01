@@ -193,7 +193,7 @@ For the value “C”, please refer to
 <a href="#symbols-punctuation">3.2.3 Symbols and Punctuation Characters</a>
 for more details.
 </p>
-<h3>3.2 Spacing Algorithm</h3>
+<h3 id="spacing">3.2 Spacing Algorithm</h3>
 <p>
 The auto-spacing should be inserted between “W” and “N”, and between “N” and “W”,
 after resolving the conditional value “C” to “N” or “O”.
@@ -207,8 +207,7 @@ There are two ways to represent a space:
 a character space (by the insertion of physical code points),
 or in a glyph space (similar to kerning,
 adjusting the metrics of adjacent glyphs on the device).
-A glyph space is recommended
-for high-level protocols or applications that can represent glyph spaces.
+High-level protocols or applications should use glyph spaces where possible.
 </p>
 <h3>3.3 Scope of the Property</h3>
 
@@ -405,6 +404,7 @@ are availble for references.
   <li>Editorial updates to:
     <ul class="inline">
       <li><a href="#overview">1 Overview</a></li>
+      <li><a href="#spacing">3.2 Spacing Algorithm</a></li>
       <li><a href="#grapheme-cluster">3.3.1 Grapheme Cluster</a></li>
       <li><a href="#space-char">3.3.2 Space Characters</a></li>
     </ul>
