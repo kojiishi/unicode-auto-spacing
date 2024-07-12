@@ -60,9 +60,10 @@ ul.inline {
   <dt>Authors</dt>
   <dd>Koji Ishii (Google), Yasuo Kida (W3C), Fuqiao Xue (W3C)</dd>
   <dt>Date</dt>
-  <dd>Jul 1, 2024</dd>
+  <dd>Jul 12, 2024</dd>
   <dt>Supersedes</dt>
   <dd>
+    <a href="https://www.unicode.org/L2/L2024/24057r-auto-spacing-prop.pdf">L2/24-057R</a>,
     <a href="https://www.unicode.org/L2/L2024/24057-auto-spacing-prop.pdf">L2/24-057</a>,
     <a href="https://www.unicode.org/L2/L2023/23283-auto-spacing-prop.pdf">L2/23-283</a>.
     See the <a href="#modifications">Modifications</a>.
@@ -115,12 +116,14 @@ used in such environments, similarity to existing characters has been taken into
 consideration. It also takes East Asian characters in non-East Asian texts into
 account.
 </p>
-<h2>2 Conformance</h2>
+<h2 id="conformance">2 Conformance</h2>
 <p>
 The property defined in this report is informative. The intent of this report is
 to provide, in the absence of other information, a reasonable way to determine
 the correct automatic spacing, but this behavior can be overridden by inserting
-space characters, or by a higher-level protocol, such as through markup or by
+space characters
+as described in <a href="#space-char">3.3.2 Space Characters</a>,
+or by a higher-level protocol, such as through markup or by
 the preferences of a layout application. This default determination is defined
 in the accompanying data file <a href="#data">Data</a>,
 but in no way implies that the spacing is
@@ -387,6 +390,16 @@ are availble for references.
 </p>
 
 <h1 id="modifications">Modifications</h1>
+
+<h2>
+  Modifications from
+  <a href="https://www.unicode.org/L2/L2024/24057r-auto-spacing-prop.pdf">L2/24-057R</a>
+</h2>
+<ul>
+  <li>Linked to <a href="#space-char">3.3.2 Space Characters</a>
+    from <a href="#conformance">Conformance</a> section.
+  </li>
+</ul>
 
 <h2>
   Modifications from
