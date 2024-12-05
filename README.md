@@ -17,10 +17,20 @@ Before running scripts, please make sure you are in the virtualenv.
 ```shell-session
 pipenv shell
 ```
+
 Then this script builds the data file.
 ```shell-session
 ./scripts/build.sh
 ```
+
+Note that the command above caches the Unicode data files locally,
+and uses the cached data files if available.
+To force downloading the data files,
+add the "`-f`" option.
+```shell-session
+./scripts/build.sh -f
+```
+
 You can then view the diff by regular `git` commands:
 ```shell-session
 git diff
