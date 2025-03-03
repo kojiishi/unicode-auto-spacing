@@ -45,7 +45,12 @@ run the pre-commit checks before committing:
 
 ## Links
 
-* [Unicode Auto Spacing (Proposal) L2/24-057](https://www.unicode.org/L2/L2024/24057-auto-spacing-prop.pdf)
-  * Old: [Proposal to add a property for auto inter-script spacing L2/23-283](https://www.unicode.org/L2/L2023/23283-auto-spacing-prop.pdf)
+* Unicode Proposals:
+  * [Proposed Draft UTR #59, East Asian Spacing L2/25-046](https://www.unicode.org/L2/L2025/25046-utr59-draft-pri510.pdf)
+  * [Working Draft UTR #59, East Asian Spacing (HTML) (revised) L2/24-259R](https://www.unicode.org/L2/L2024/24259r-tr59-1-working-draft.html)
+  * [Working Draft UTR #59, East Asian Spacing (HTML) L2/24-259](https://www.unicode.org/L2/L2024/24259-tr59-1-working-draft.html)
+  * [Unicode Auto Spacing (Proposal) [supersedes L2/23-283] (revised) L2/24-057R](https://www.unicode.org/L2/L2024/24057r-auto-spacing-prop.pdf)
+  * [Unicode Auto Spacing (Proposal) [supersedes L2/23-283] L2/24-057](https://www.unicode.org/L2/L2024/24057-auto-spacing-prop.pdf)
+  * [Proposal to add a property for auto inter-script spacing L2/23-283](https://www.unicode.org/L2/L2023/23283-auto-spacing-prop.pdf)
 * [The current data file](https://github.com/kojiishi/unicode-auto-spacing/blob/main/auto-spacing.txt)
   * [In a spreadsheet format](https://docs.google.com/spreadsheets/d/1Y8gIy5ExavkUD3SWz8cgXvns8xfawfZh6-kaLT7Dju8/edit?usp=sharing)
