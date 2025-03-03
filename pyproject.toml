@@ -1,0 +1,15 @@
+[project]
+name = "unicode-auto-spacing"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "unicodedata-reader>=1.3.5",
+]
+
+[dependency-groups]
+dev = [
+    "pytype>=2024.9.13",
+    "yapf>=0.43.0",
+]

@@ -6,19 +6,16 @@ The source is in [docs/index.html](docs/index.html).
 
 ## Installing
 
-After cloning the repository:
-```shell-session
-pipenv install
-```
+The scripts in this repository requires [uv]
+to manage its dependencies and virtual environments.
+Please refer to the [uv installation documentation].
+
+[uv]: https://github.com/astral-sh/uv
+[uv installation documentation]: https://github.com/astral-sh/uv?tab=readme-ov-file#installation
 
 ## Build the Data File
 
-Before running scripts, please make sure you are in the virtualenv.
-```shell-session
-pipenv shell
-```
-
-Then this script builds the data file.
+This script builds the data file.
 ```shell-session
 ./scripts/build.sh
 ```
@@ -41,11 +38,7 @@ git diff
 ## Code Changes
 
 If you are planning to commit code changes,
-please install the dev packages as well:
-```shell-session
-pipenv install -d
-```
-and run the pre-commit checks:
+run the pre-commit checks before committing:
 ```shell-session
 ./scripts/precommit.sh
 ```
