@@ -4,14 +4,14 @@ The proposal is
 [available here](https://kojiishi.github.io/unicode-auto-spacing/).
 The source is in [docs/index.html](docs/index.html).
 
-## Installing
+## Installation
 
 The scripts in this repository requires [uv]
 to manage its dependencies and virtual environments.
-Please refer to the [uv installation documentation].
+Please refer to the [uv installation].
 
 [uv]: https://github.com/astral-sh/uv
-[uv installation documentation]: https://github.com/astral-sh/uv?tab=readme-ov-file#installation
+[uv installation]: https://github.com/astral-sh/uv?tab=readme-ov-file#installation
 
 ## Build the Data File
 
