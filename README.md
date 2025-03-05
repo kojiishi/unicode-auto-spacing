@@ -52,5 +52,6 @@ run the pre-commit checks before committing:
   * [Unicode Auto Spacing (Proposal) [supersedes L2/23-283] (revised) L2/24-057R](https://www.unicode.org/L2/L2024/24057r-auto-spacing-prop.pdf)
   * [Unicode Auto Spacing (Proposal) [supersedes L2/23-283] L2/24-057](https://www.unicode.org/L2/L2024/24057-auto-spacing-prop.pdf)
   * [Proposal to add a property for auto inter-script spacing L2/23-283](https://www.unicode.org/L2/L2023/23283-auto-spacing-prop.pdf)
-* [The current data file](https://github.com/kojiishi/unicode-auto-spacing/blob/main/auto-spacing.txt)
-  * [In a spreadsheet format](https://docs.google.com/spreadsheets/d/1Y8gIy5ExavkUD3SWz8cgXvns8xfawfZh6-kaLT7Dju8/edit?usp=sharing)
+* The current data file
+  * [In the UCD format](https://github.com/kojiishi/unicode-auto-spacing/blob/main/auto-spacing.txt)
+  * [In the spreadsheet format](https://docs.google.com/spreadsheets/d/1Y8gIy5ExavkUD3SWz8cgXvns8xfawfZh6-kaLT7Dju8/edit?usp=sharing)
