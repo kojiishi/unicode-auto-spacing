@@ -11,7 +11,7 @@ to manage its dependencies and virtual environments.
 Please refer to the [uv installation].
 
 [uv]: https://github.com/astral-sh/uv
-[uv installation]: https://github.com/astral-sh/uv?tab=readme-ov-file#installation
+[uv installation]: https://docs.astral.sh/uv/getting-started/installation/
 
 ## Build the Data File
 
