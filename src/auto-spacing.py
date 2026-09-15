@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import logging
 import argparse
 import re
 import typing
@@ -152,11 +153,28 @@ class AutoSpacing(object):
                             '--clear-cache',
                             action='store_true',
                             help='Clear the Unicode data cache.')
+        parser.add_argument(
+            "-v",
+            "--verbose",
+            help="increase output verbosity",
+            action="count",
+            default=0,
+        )
         args = parser.parse_args()
+        _init_logging(args.verbose)
         if args.clear_cache:
             ur.UnicodeDataCachedReader.clear_cache()
         spacing = AutoSpacing()
         spacing.print(args)
+
+
+def _init_logging(verbose):
+    if verbose <= 0:
+        return
+    if verbose <= 1:
+        logging.basicConfig(level=logging.INFO)
+        return
+    logging.basicConfig(level=logging.DEBUG)
 
 
 if __name__ == "__main__":
