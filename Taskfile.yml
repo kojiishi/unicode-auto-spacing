@@ -11,10 +11,13 @@ tasks:
 
   check:
     - task: type
+    - task: lint
     - task: fmtchk
 
+  fix: "{{.RUN}} ruff check --fix {{.CLI_ARGS}}"
   fmt: "{{.RUN}} ruff format {{.CLI_ARGS}}"
   fmtchk: "{{.RUN}} ruff format --check {{.CLI_ARGS}}"
+  lint: "{{.RUN}} ruff check {{.CLI_ARGS}}"
   type: "{{.RUN}} pyrefly check {{.PYREFLY}} {{.CLI_ARGS}}"
 
 vars:

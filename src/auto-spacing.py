@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
-import logging
+from __future__ import annotations
+
 import argparse
+import logging
 import re
 import typing
+
 import unicodedata_reader as ur
 
 
-class AutoSpacing(object):
+class AutoSpacing:
     def __init__(self) -> None:
         ideographs = ur.Set()
         scripts = []
@@ -55,7 +58,7 @@ class AutoSpacing(object):
         self.letters_numerals = letters_numerals
         self.conditional = conditional
 
-    def value(self, code: int) -> typing.Optional[str]:
+    def value(self, code: int) -> str | None:
         if code in self.ideographs:
             return "W"
         if code in self.conditional:
@@ -81,7 +84,7 @@ class AutoSpacing(object):
             sc_by_code = ur.UnicodeDataReader.default.scripts().to_dict()
         else:
             print(self.headers)
-        code_points = range(0, 0x110000)
+        code_points = range(0x110000)
 
         # Make a list of pairs of (code, value).
         #
@@ -134,10 +137,10 @@ class AutoSpacing(object):
                     row.append(name_by_code.get(c, ""))
                     print("\t".join(row))
                 continue
-            print("{0:14} ; {1}  # {2:2}  {3}".format(code, value, eaw, name).rstrip())
+            print(f"{code:14} ; {value}  # {eaw:2}  {name}".rstrip())
 
     @staticmethod
-    def value_if_common(dict: typing.Dict[int, str], entry: ur.UnicodeDataEntry):
+    def value_if_common(dict: dict[int, str], entry: ur.UnicodeDataEntry):
         value = dict.get(entry.min)
         if value is None:
             return ""
