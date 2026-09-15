@@ -11,8 +11,11 @@ tasks:
 
   check:
     - "{{.RUN}} yapf -ir -vv src"
-    - "{{.RUN}} pytype src"
+    - task: type
+
+  type: "{{.RUN}} pyrefly check {{.PYREFLY}} {{.CLI_ARGS}}"
 
 vars:
   GEN:
+  PYREFLY: --summarize-errors
   RUN: uv run
