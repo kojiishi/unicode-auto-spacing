@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+tasks:
+  default:
+    - task: check
+
+  build:
+    - "{{.RUN}} src/auto-spacing.py {{.GEN}} {{.CLI_ARGS}} > auto-spacing.txt"
+
+  check:
+    - "{{.RUN}} yapf -ir -vv src"
+    - "{{.RUN}} pytype src"
+
+vars:
+  GEN:
+  RUN: uv run

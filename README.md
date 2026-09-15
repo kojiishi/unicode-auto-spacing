@@ -15,9 +15,11 @@ Please refer to the [uv installation].
 
 ## Build the Data File
 
-This script builds the data file.
-```shell-session
-./scripts/build.sh
+Please [install task] if you haven't done yet.
+
+Then the following command builds the data file.
+```shell
+task build
 ```
 
 > [!NOTE]
@@ -26,8 +28,8 @@ This script builds the data file.
 > To force downloading the data files,
 > such as when the Unicode data is updated,
 > please add the "`-f`" option.
-> ```shell-session
-> ./scripts/build.sh -f
+> ```shell
+> task build -- -f
 > ```
 
 You can then view the diff by regular `git` commands:
@@ -39,8 +41,8 @@ git diff
 
 If you are planning to commit code changes,
 run the pre-commit checks before committing:
-```shell-session
-./scripts/precommit.sh
+```shell
+task check
 ```
 
 ## Links
@@ -55,3 +57,5 @@ run the pre-commit checks before committing:
 * The current data file
   * [In the UCD format](https://github.com/kojiishi/unicode-auto-spacing/blob/main/auto-spacing.txt)
   * [In the spreadsheet format](https://docs.google.com/spreadsheets/d/1Y8gIy5ExavkUD3SWz8cgXvns8xfawfZh6-kaLT7Dju8/edit?usp=sharing)
+
+[install task]: https://taskfile.dev/docs/installation
