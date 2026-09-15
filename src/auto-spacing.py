@@ -15,7 +15,6 @@ class AutoSpacing:
         scripts = []
         scripts += [("Bopomofo", "Bopo")]
         scripts += [("Han", "Hani")]
-        scripts += [("Hangul", "Hang")]
         scripts += [("Hiragana", "Hira")]
         scripts += [("Katakana", "Kana")]
         scripts += [("Khitan_Small_Script", "Kits")]
@@ -41,6 +40,8 @@ class AutoSpacing:
         letters_numerals = ur.Set()
         letters_numerals |= ur.Set.general_category("L", "M", "Nd")
         letters_numerals -= ur.Set.east_asian_width("F", "H", "W")
+        # Hangul is "O".
+        letters_numerals -= ur.Set.scripts("Hangul")
 
         conditional = ur.Set()
         conditional |= ur.Set.general_category("Po")
