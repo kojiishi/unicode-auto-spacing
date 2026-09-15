@@ -6,16 +6,13 @@ The source is in [docs/index.html](docs/index.html).
 
 ## Installation
 
-The scripts in this repository requires [uv]
-to manage its dependencies and virtual environments.
-Please refer to the [uv installation].
-
-[uv]: https://github.com/astral-sh/uv
-[uv installation]: https://docs.astral.sh/uv/getting-started/installation/
+If you want to run scripts:
+* The scripts in this repository requires [uv]
+  to manage its dependencies and virtual environments.
+  Please refer to the [uv installation].
+* [Install task].
 
 ## Build the Data File
-
-Please [install task] if you haven't done yet.
 
 Then the following command builds the data file.
 ```shell
@@ -59,3 +56,5 @@ task check
   * [In the spreadsheet format](https://docs.google.com/spreadsheets/d/1Y8gIy5ExavkUD3SWz8cgXvns8xfawfZh6-kaLT7Dju8/edit?usp=sharing)
 
 [install task]: https://taskfile.dev/docs/installation
+[uv]: https://github.com/astral-sh/uv
+[uv installation]: https://docs.astral.sh/uv/getting-started/installation/
