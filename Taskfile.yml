@@ -10,9 +10,11 @@ tasks:
     - "{{.RUN}} src/auto-spacing.py {{.GEN}} {{.CLI_ARGS}} > auto-spacing.txt"
 
   check:
-    - "{{.RUN}} yapf -ir -vv src"
     - task: type
+    - task: fmtchk
 
+  fmt: "{{.RUN}} ruff format {{.CLI_ARGS}}"
+  fmtchk: "{{.RUN}} ruff format --check {{.CLI_ARGS}}"
   type: "{{.RUN}} pyrefly check {{.PYREFLY}} {{.CLI_ARGS}}"
 
 vars:
